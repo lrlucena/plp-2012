@@ -67,6 +67,10 @@
       <arg value="-OUTPUT_DIRECTORY=${src}/plp/orientadaObjetos2/parser" />
       <arg value="${src}/plp/orientadaObjetos2/parser/OO2.jj" />
     </java>
+    <java classpath="lib/javacc.jar" classname="javacc">
+      <arg value="-OUTPUT_DIRECTORY=${src}/plp/mixin/parser" />
+      <arg value="${src}/plp/mixin/parser/mixin.jj" />
+    </java>
   </target>
 
   <target name="compile" depends="init">
