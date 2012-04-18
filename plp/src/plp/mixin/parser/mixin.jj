@@ -205,6 +205,7 @@ TOKEN : /* TOKENS DE OO1 */
   < NEW : "new" >
 | < THIS : "this" >
 | < CLASSE : "classe" >
+| < CATEGORIA : "categoria" >
 | < NULL : "null" >
 | < PROC : "proc" >
 }
@@ -1074,33 +1075,82 @@ AcessoAtributoIdOO2 PAcessoAtributoIdChamador() :
 }
 
 /**
-*ListaDeclaracaoOO := DecClasse
-*                   | DecClasse "," ListaDeclaracaoOO
+*  ListaDeclaracaoOO := DecClasse
+*                    |  DecCategoria
+*                    | DecClasse "," ListaDeclaracaoOO
+*                    | DecCategoria "," ListaDeclaracaoOO
 **/
 
 ListaDeclaracaoOO PListaDeclaracaoOO() :
 {
 	ListaDeclaracaoOO retorno;
 	DecClasse decClasse;
+	DecCategoria decCategoria;
 }
 {
   (
     LOOKAHEAD(PDecClasseAtomica() < COMMA >)
     	retorno = PDecClasseComposta()
-  	|decClasse = PDecClasseAtomica()
-  	{
+    |
+    LOOKAHEAD(PDecCategoriaAtomica() < COMMA >)
+    	retorno = PDecCategoriaComposta()
+    |
+    decClasse = PDecClasseAtomica()
+    {
     	retorno = new ListaDeclaracaoOO(decClasse);
-  	}
+    }
+    |
+    decCategoria = PDecCategoriaAtomica()
+    {
+    	retorno = new ListaDeclaracaoOO(decCategoria);
+    }
   )
   {
     return retorno;
   }
 }
 
+
+/**
+ * DecCategoria ::= "categoria" Id "{" DecProcedimento "}"
+ **/
+
+DecCategoria PDecCategoriaAtomica() :
+{
+  Id nome;
+  DecProcedimento metodos;
+}
+{
+	     <CLASSE> nome = PId()
+	     <LBRACE>
+		metodos = PDecProcedimento()
+             <RBRACE>
+			{
+				return new DecCategoriaSimples(nome, metodos);
+			}
+}
+
+
+/**
+ * ...  | DecCategoria "," ListaDeclaracaoOO
+ **/
+ListaDeclaracaoOO PDecCategoriaComposta() :
+{
+  DecCategoria d1;
+  ListaDeclaracaoOO d2;
+}
+{
+  d1 = PDecCategoriaAtomica() < COMMA > d2 = PListaDeclaracaoOO()
+  {
+    return new ListaDeclaracaoOO(d1, d2);
+  }
+}
+
+
 /**
  * DecClasse ::= "classe" Id ["extends" Id] "{" DecVariavel ";" DecConstrutor ";" DecProcedimento "}"
  **/
- 
+
 DecClasse PDecClasseAtomica() :
 {
   Id nomeClasse;
@@ -1115,28 +1165,28 @@ DecClasse PDecClasseAtomica() :
 		LOOKAHEAD(<CLASSE> PId() <EXTENDS> PId())
 		(
 			<CLASSE> nomeClasse = PId() <EXTENDS> superClasse = PId()
-			<LBRACE> 
+			<LBRACE>
 				atributos = PDecVariavel() <SEMICOLON>
 				decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
-				metodos = PDecProcedimento() 
-			<RBRACE>
-			{
-				resposta = new DecClasseSimplesOO2(nomeClasse, superClasse, atributos, decConstrutor, metodos);
-			}	
-		)
-		|
-		LOOKAHEAD(<CLASSE> PId())
-		(
-			<CLASSE> nomeClasse = PId() 
-			<LBRACE> 
-				atributos = PDecVariavel() <SEMICOLON>
-				decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
-				metodos = PDecProcedimento() 
+				metodos = PDecProcedimento()
 			<RBRACE>
 			{
 				resposta = new DecClasseSimplesOO2(nomeClasse, superClasse, atributos, decConstrutor, metodos);
 			}
-		) 
+		)
+		|
+		LOOKAHEAD(<CLASSE> PId())
+		(
+			<CLASSE> nomeClasse = PId()
+			<LBRACE>
+				atributos = PDecVariavel() <SEMICOLON>
+				decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
+				metodos = PDecProcedimento()
+			<RBRACE>
+			{
+				resposta = new DecClasseSimplesOO2(nomeClasse, superClasse, atributos, decConstrutor, metodos);
+			}
+		)
 	)
 	{
 		return resposta;
@@ -1198,7 +1248,7 @@ DecConstrutor PDecConstrutor(Id nomeClasse):
     		nomeMetodo = PId() <LPAREN> listaPar = PListaDeclaracaoParametro() <RPAREN>
     		<LBRACE> comando = PComando() <RBRACE>
     )
-    
+
 	{
 	    if(listaPar == null) {
 	        listaPar = new ListaDeclaracaoParametro();
