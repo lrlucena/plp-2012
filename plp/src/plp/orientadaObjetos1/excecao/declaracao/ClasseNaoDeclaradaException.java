@@ -8,11 +8,16 @@ import plp.expressions2.expression.Id;
  * não foi declarada anteriormente.
  */
 public class ClasseNaoDeclaradaException extends Exception {
+
+    public ClasseNaoDeclaradaException(String str) {
+        super(str);
+    }
+
     /**
      * Construtor
      * @param id Identificador representando a classe.
      */
-    public ClasseNaoDeclaradaException(Id id) {
+   public ClasseNaoDeclaradaException(Id id) {
         super("Classe " + id + " não declarada.");
     }
 }

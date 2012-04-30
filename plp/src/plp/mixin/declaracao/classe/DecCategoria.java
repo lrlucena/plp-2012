@@ -6,6 +6,7 @@ import plp.mixin.excecao.declaracao.CategoriaNaoDeclaradaException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoJaDeclaradoException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
 import plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
+import plp.orientadaObjetos1.memoria.AmbienteExecucaoOO1;
 import plp.mixin.memoria.AmbienteExecucaoMixin;
 
 /**
@@ -20,7 +21,7 @@ public interface DecCategoria extends Declaracao {
      *  e valores.
      * @return o ambiente modificado pela inicialização da variável.
      */
-    public AmbienteExecucaoOO1 elabora(AmbienteExecucaoOO1 ambiente)
+    public AmbienteExecucaoMixin elabora(AmbienteExecucaoMixin ambiente)
        throws CategoriaJaDeclaradaException,CategoriaNaoDeclaradaException,
              ProcedimentoNaoDeclaradoException,ProcedimentoJaDeclaradoException;
 
@@ -32,7 +33,7 @@ public interface DecCategoria extends Declaracao {
      * @return <code>true</code> se os tipos da declaração são válidos;
      *          <code>false</code> caso contrario.
      */
-    public boolean checaTipo(AmbienteCompilacaoMixin ambiente)
+    public boolean checaTipo(AmbienteCompilacaoOO1 ambiente)
        throws CategoriaJaDeclaradaException,CategoriaNaoDeclaradaException,
            ProcedimentoNaoDeclaradoException, ProcedimentoJaDeclaradoException ;
 }

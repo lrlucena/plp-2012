@@ -3,7 +3,9 @@ package plp.mixin.declaracao;
 import plp.expressions2.memory.VariavelJaDeclaradaException;
 import plp.expressions2.memory.VariavelNaoDeclaradaException;
 import plp.imperative1.util.Lista;
+import plp.orientadaObjetos1.declaracao.Declaracao;
 import plp.orientadaObjetos1.declaracao.classe.DecClasse;
+import plp.mixin.declaracao.classe.DecCategoria;
 import plp.orientadaObjetos1.excecao.declaracao.ClasseJaDeclaradaException;
 import plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoJaDeclaradoException;
@@ -13,7 +15,7 @@ import plp.mixin.memoria.AmbienteCompilacaoOO2;
 import plp.mixin.memoria.AmbienteExecucaoOO2;
 
 
-public class ListaDeclaracaoOO extends Lista<DecClasse> {
+public class ListaDeclaracaoOO extends Lista<Declaracao> {
 	/**
 	 * Construtor.
 	 */
@@ -30,6 +32,10 @@ public class ListaDeclaracaoOO extends Lista<DecClasse> {
 		super(decOO, new ListaDeclaracaoOO());
 	}
 
+	public ListaDeclaracaoOO(DecCategoria decOO) {
+		super(decOO, new ListaDeclaracaoOO());
+	}
+
 	/**
 	 * Construtor.
 	 *
@@ -39,6 +45,10 @@ public class ListaDeclaracaoOO extends Lista<DecClasse> {
 	 *            Restante da tail de declaracoes.
 	 */
 	public ListaDeclaracaoOO(DecClasse decOO, ListaDeclaracaoOO lista) {
+		super(decOO, lista);
+	}
+
+	public ListaDeclaracaoOO(DecCategoria decOO, ListaDeclaracaoOO lista) {
 		super(decOO, lista);
 	}
 

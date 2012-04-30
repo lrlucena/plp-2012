@@ -2,14 +2,14 @@ package plp.mixin.declaracao.classe;
 
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimento;
 import plp.orientadaObjetos1.declaracao.variavel.DecVariavel;
-import plp.orientadaObjetos1.excecao.declaracao.ClasseJaDeclaradaException;
-import plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
+import plp.mixin.excecao.declaracao.CategoriaJaDeclaradaException;
+import plp.mixin.excecao.declaracao.CategoriaNaoDeclaradaException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoJaDeclaradoException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
-import plp.orientadaObjetos1.memoria.AmbienteExecucaoOO1;
-import plp.orientadaObjetos1.memoria.DefClasse;
+import plp.mixin.memoria.AmbienteExecucaoMixin;
+import plp.mixin.memoria.DefCategoria;
 import plp.orientadaObjetos1.util.TipoClasse;
 /**
  * Classe que representa a declaracao de uma unica classe.
@@ -58,6 +58,7 @@ public class DecCategoriaSimples implements DecCategoria {
         // }
         // ambiente.restaura();
         // return resposta;
+        return false;
     }
 
     /**

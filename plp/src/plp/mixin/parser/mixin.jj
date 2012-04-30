@@ -21,6 +21,8 @@ import plp.orientadaObjetos1.comando.Write;
 import plp.orientadaObjetos1.comando.Procedimento;
 import plp.orientadaObjetos1.declaracao.Declaracao;
 import plp.orientadaObjetos1.declaracao.classe.DecClasse;
+import plp.mixin.declaracao.classe.DecCategoria;
+import plp.mixin.declaracao.classe.DecCategoriaSimples;
 import plp.orientadaObjetos1.declaracao.procedimento.DecParametro;
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimento;
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimentoComposta;
@@ -1095,10 +1097,12 @@ ListaDeclaracaoOO PListaDeclaracaoOO() :
     LOOKAHEAD(PDecCategoriaAtomica() < COMMA >)
     	retorno = PDecCategoriaComposta()
     |
-    decClasse = PDecClasseAtomica()
-    {
-    	retorno = new ListaDeclaracaoOO(decClasse);
-    }
+    LOOKAHEAD(PDecClasseAtomica())
+    ( decClasse = PDecClasseAtomica()
+      {
+      	retorno = new ListaDeclaracaoOO(decClasse);
+      }
+    )
     |
     decCategoria = PDecCategoriaAtomica()
     {

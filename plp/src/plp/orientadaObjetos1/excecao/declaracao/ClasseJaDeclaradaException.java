@@ -8,6 +8,10 @@ import plp.expressions2.expression.Id;
  * anteriormente.
  */
 public class ClasseJaDeclaradaException extends Exception {
+    public ClasseJaDeclaradaException(String str) {
+        super(str);
+    }
+
     /**
      * Construtor
      * @param id Identificador representando a classe.
