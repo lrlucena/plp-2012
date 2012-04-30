@@ -11,7 +11,7 @@ import plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoJaDeclaradoException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
-import plp.mixin.memoria.AmbienteCompilacaoOO2;
+import plp.mixin.memoria.AmbienteCompilacaoMixin;
 
 public class DecConstrutor extends DecProcedimentoSimples {
 	private Id nomeClasse;
@@ -21,7 +21,7 @@ public class DecConstrutor extends DecProcedimentoSimples {
 		this.nomeClasse = nomeClasse;
 	}
 
-	public boolean checaTipo(AmbienteCompilacaoOO2 ambiente) throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
+	public boolean checaTipo(AmbienteCompilacaoMixin ambiente) throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
 					ProcedimentoJaDeclaradoException, ProcedimentoNaoDeclaradoException, ClasseNaoDeclaradaException, ClasseJaDeclaradaException, ConstrutorNaoDeclaradoException {
 		boolean resposta = ( this.nomeClasse.toString().equals(this.nome.toString()) );
 

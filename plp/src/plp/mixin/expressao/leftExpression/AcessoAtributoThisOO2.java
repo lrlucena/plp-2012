@@ -40,7 +40,6 @@ public class AcessoAtributoThisOO2 extends AcessoAtributoThis {
             	  resposta = false;
                   Tipo tipo = varThis.getTipo(ambiente);
                   DefClasseOO2 defClasse = (DefClasseOO2) ambiente.getDefClasse(tipo.getTipo());
-
                   if (defClasse.getNomeSuperClasse() != null) {
                 	  resposta = this.checaTipoClasseMae(ambiente, defClasse.getNomeSuperClasse());
                   }
@@ -74,7 +73,7 @@ public class AcessoAtributoThisOO2 extends AcessoAtributoThis {
 	}
 
     /**
-     * Obtém o tipo do atributo acessado.
+     * Obtï¿½m o tipo do atributo acessado.
      * @param ambiente o ambiente com o mapeamento de identificadores a tipos.
      * @return true, se foi associado um tipo a esse identificador acessado no
      * escopo corrente.
@@ -82,7 +81,7 @@ public class AcessoAtributoThisOO2 extends AcessoAtributoThis {
      * @throws ClasseNaoDeclaradaException
      */
     public Tipo getTipo(AmbienteCompilacaoOO1 ambiente) throws VariavelNaoDeclaradaException,ClasseNaoDeclaradaException{
-        //Logo abaixo obtenho a definicao da Classe (seus métodos e atributos).
+        //Logo abaixo obtenho a definicao da Classe (seus mï¿½todos e atributos).
         //this.getTipo() devera retornar uma instancia de TipoClasse e assim, TipoClasse.getTipo()
         //retorna o id (contendo o nome da classe) associado ao tipo dela
     	DefClasseOO2 defClasse = (DefClasseOO2) ambiente.getDefClasse(varThis.getTipo(ambiente).getTipo());
@@ -92,7 +91,7 @@ public class AcessoAtributoThisOO2 extends AcessoAtributoThis {
         	retorno = this.getTipoAtributoHerdado(ambiente, defClasse.getNomeSuperClasse(), super.getId());
         }
 
-        // Se nenhuma das minhas classes m‹es possuem o atributo procuro localmente
+        // Se nenhuma das minhas classes mï¿½es possuem o atributo procuro localmente
         if (retorno == null) {
         	retorno = defClasse.getTipoAtributo(super.getId());
         }

@@ -14,8 +14,8 @@ import plp.orientadaObjetos1.excecao.execucao.EntradaNaoFornecidaException;
 import plp.orientadaObjetos1.memoria.colecao.ListaValor;
 import plp.mixin.declaracao.ConstrutorNaoDeclaradoException;
 import plp.mixin.declaracao.ListaDeclaracaoOO;
-import plp.mixin.memoria.AmbienteCompilacaoOO2;
-import plp.mixin.memoria.AmbienteExecucaoOO2;
+import plp.mixin.memoria.AmbienteCompilacaoMixin;
+import plp.mixin.memoria.AmbienteExecucaoMixin;
 
 /**
  * Classe que representa um programa na linguagem OO.
@@ -53,7 +53,7 @@ public class Programa {
      * @throws ConstrutorNaoDeclaradoException
      *
      */
-    public ListaValor executar(AmbienteExecucaoOO2 ambiente)
+    public ListaValor executar(AmbienteExecucaoMixin ambiente)
         throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException,
                ObjetoNaoDeclaradoException, ObjetoJaDeclaradoException,
                ProcedimentoJaDeclaradoException,ProcedimentoNaoDeclaradoException,
@@ -62,8 +62,7 @@ public class Programa {
         if(ambiente == null)
             throw new EntradaNaoFornecidaException();
         ambiente.incrementa();
-        ambiente = (AmbienteExecucaoOO2) comando.executar(declaracoesOO.elabora(ambiente));
-        ambiente.restaura();
+        comando.executar(declaracoesOO.elabora(ambiente)).restaura();
         return ambiente.getSaida();
     }
 
@@ -79,7 +78,7 @@ public class Programa {
      * @throws ConstrutorNaoDeclaradoException
      *
      */
-    public boolean checaTipo(AmbienteCompilacaoOO2 ambiente)
+    public boolean checaTipo(AmbienteCompilacaoMixin ambiente)
         throws VariavelNaoDeclaradaException, VariavelJaDeclaradaException,
                ProcedimentoNaoDeclaradoException, ProcedimentoJaDeclaradoException,
                ClasseJaDeclaradaException, ClasseNaoDeclaradaException,
@@ -89,7 +88,7 @@ public class Programa {
             throw new EntradaNaoFornecidaException();
         }
         ambiente.incrementa();
-        resposta = declaracoesOO.checaTipo((AmbienteCompilacaoOO2) ambiente) && comando.checaTipo(ambiente);
+        resposta = declaracoesOO.checaTipo(ambiente) && comando.checaTipo(ambiente);
         ambiente.restaura();
         return resposta;
     }

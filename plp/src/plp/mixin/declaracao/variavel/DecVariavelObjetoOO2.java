@@ -19,7 +19,7 @@ import plp.orientadaObjetos1.memoria.AmbienteExecucaoOO1;
 import plp.orientadaObjetos1.util.Tipo;
 import plp.mixin.comando.NewOO2;
 import plp.mixin.declaracao.ConstrutorNaoDeclaradoException;
-import plp.mixin.memoria.AmbienteExecucaoOO2;
+import plp.mixin.memoria.AmbienteExecucaoMixin;
 import plp.mixin.memoria.DefClasseOO2;
 
 public class DecVariavelObjetoOO2 extends DecVariavelObjeto {
@@ -37,7 +37,7 @@ public class DecVariavelObjetoOO2 extends DecVariavelObjeto {
 			ObjetoNaoDeclaradoException, ObjetoJaDeclaradoException,
 			ClasseNaoDeclaradaException {
 
-		AmbienteExecucaoOO2 aux = (AmbienteExecucaoOO2) new SimplesDecVariavel(
+		AmbienteExecucaoMixin aux = (AmbienteExecucaoMixin) new SimplesDecVariavel(
 				getTipo(), getObjeto(), new ValorNull()).elabora(ambiente);
 
 		try {

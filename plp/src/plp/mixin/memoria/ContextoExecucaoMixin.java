@@ -11,25 +11,27 @@ import plp.orientadaObjetos1.expressao.valor.ValorNull;
 import plp.orientadaObjetos1.memoria.ContextoExecucaoOO1;
 import plp.orientadaObjetos1.memoria.DefClasse;
 import plp.orientadaObjetos1.memoria.colecao.ListaValor;
-import plp.mixin.util.SuperClasseMap;
+import plp.orientadaObjetos2.util.SuperClasseMap;
+import plp.mixin.excecao.declaracao.CategoriaNaoDeclaradaException;
+import plp.mixin.excecao.declaracao.CategoriaJaDeclaradaException;
 
-public class ContextoExecucaoOO2 extends ContextoExecucaoOO1 implements AmbienteExecucaoOO2 {
+public class ContextoExecucaoMixin extends ContextoExecucaoOO1 implements AmbienteExecucaoMixin {
 	private ArrayList<SuperClasseMap> arraySuperClasse;
 
-	public ContextoExecucaoOO2() {
+	public ContextoExecucaoMixin() {
 		super();
 		arraySuperClasse = new ArrayList <SuperClasseMap> ();
 	}
 
-	public ContextoExecucaoOO2(AmbienteExecucaoOO2 ambiente) throws VariavelJaDeclaradaException {
+	public ContextoExecucaoMixin(AmbienteExecucaoMixin ambiente) throws VariavelJaDeclaradaException {
 		super(ambiente);
-		arraySuperClasse = ((AmbienteExecucaoOO2) ambiente).getMapSuperClasse();
+		arraySuperClasse = ((AmbienteExecucaoMixin) ambiente).getMapSuperClasse();
 		HashMap<Id, Valor> aux = new HashMap<Id, Valor>();
 		aux.put(new Id("super"), new ValorNull());
 		getPilha().push(aux);
 	}
 
-	public ContextoExecucaoOO2(ListaValor entrada) throws VariavelJaDeclaradaException {
+	public ContextoExecucaoMixin(ListaValor entrada) throws VariavelJaDeclaradaException {
 		super(entrada);
 		arraySuperClasse = new ArrayList <SuperClasseMap> ();
 		HashMap<Id, Valor> aux = new HashMap<Id, Valor>();
@@ -38,8 +40,8 @@ public class ContextoExecucaoOO2 extends ContextoExecucaoOO1 implements Ambiente
 	}
 
 	@Override
-	public ContextoExecucaoOO2 getContextoIdValor() throws VariavelJaDeclaradaException {
-		ContextoExecucaoOO2 ambiente = new ContextoExecucaoOO2(this.getEntrada());
+	public ContextoExecucaoMixin getContextoIdValor() throws VariavelJaDeclaradaException {
+		ContextoExecucaoMixin ambiente = new ContextoExecucaoMixin(this.getEntrada());
 		ambiente.setPilha( getPilha() );
 		ambiente.setSaida( getSaida() );
 		return ambiente;
@@ -66,4 +68,14 @@ public class ContextoExecucaoOO2 extends ContextoExecucaoOO1 implements Ambiente
 	public ArrayList<SuperClasseMap> getMapSuperClasse() {
 		return arraySuperClasse;
 	}
+        
+        public DefClasse getDefCategoria(Id idArg) throws CategoriaNaoDeclaradaException {
+            return null;
+        }
+        
+	public void mapDefCategoria(Id idArg, DefClasse defClasse)
+			throws CategoriaJaDeclaradaException {
+            //
+        }
+
 }

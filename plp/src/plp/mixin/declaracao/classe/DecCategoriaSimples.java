@@ -1,37 +1,28 @@
 package plp.mixin.declaracao.classe;
 
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimento;
-import plp.orientadaObjetos1.declaracao.variavel.DecVariavel;
+import plp.orientadaObjetos1.excecao.declaracao.ClasseJaDeclaradaException;
+import plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
 import plp.mixin.excecao.declaracao.CategoriaJaDeclaradaException;
 import plp.mixin.excecao.declaracao.CategoriaNaoDeclaradaException;
+import plp.mixin.memoria.AmbienteCompilacaoMixin;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoJaDeclaradoException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
-import plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
-import plp.mixin.memoria.AmbienteExecucaoMixin;
 import plp.mixin.memoria.DefCategoria;
-import plp.orientadaObjetos1.util.TipoClasse;
+import plp.orientadaObjetos1.declaracao.Declaracao;
+import plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
+import plp.orientadaObjetos1.memoria.AmbienteExecucaoOO1;
 /**
  * Classe que representa a declaracao de uma unica classe.
  */
-public class DecCategoriaSimples implements DecCategoria {
-	/**
-	 * Identificador do nome da classe.
-	 */
+public class DecCategoriaSimples implements  Declaracao {
+
     protected Id nome;
-
-	/**
-	 * Metodos da classe.
-	 */
+    
     protected DecProcedimento metodos;
-
-
-	/**
-	 * Construtor.
-	 * @param nomeClasse Nome da classe
-	 * @param atributos Atributos da classe
-	 * @param metodos Metodos da classe.
-	 */
+    
+    
     public  DecCategoriaSimples(Id nome, DecProcedimento metodos){
         this.nome = nome;
         this.metodos = metodos;
@@ -45,21 +36,19 @@ public class DecCategoriaSimples implements DecCategoria {
      * @return <code>true</code> se os tipos da declara vlidos;
      *          <code>false</code> caso contrario.
      */
-    public boolean checaTipo(AmbienteCompilacaoOO1 ambiente)
+    public boolean checaTipo(AmbienteCompilacaoOO1 amb)
        throws CategoriaJaDeclaradaException,CategoriaNaoDeclaradaException,
+              ClasseJaDeclaradaException,ClasseNaoDeclaradaException,
               ProcedimentoNaoDeclaradoException, ProcedimentoJaDeclaradoException  {
-
-        // ambiente.mapDefClasse(nome, new DefCategoria(nome, metodos));
-        // boolean resposta = false;
-        // ambiente.incrementa();
-        // if (atributos.checaTipo(ambiente)){
-        //     ambiente.map(new Id("this"), new TipoClasse(nomeClasse));
-        //     resposta =  metodos.checaTipo(ambiente);
-        // }
-        // ambiente.restaura();
-        // return resposta;
-        return false;
+        boolean resposta;
+        AmbienteCompilacaoMixin ambiente = (AmbienteCompilacaoMixin)amb;
+        ambiente.mapDefCategoria(nome, new DefCategoria(nome, metodos));
+        ambiente.incrementa();
+        resposta =  metodos.checaTipo(ambiente);
+        ambiente.restaura();
+        return resposta;
     }
+
 
     /**
      * Cria um mapeamento do identificador para a declarao desta classe.
@@ -67,10 +56,14 @@ public class DecCategoriaSimples implements DecCategoria {
      *  e valores.
      * @return o ambiente modificado pela declarao da classe.
      */
-    public AmbienteExecucaoMixin elabora(AmbienteExecucaoMixin ambiente)
+    public AmbienteExecucaoOO1 elabora(AmbienteExecucaoOO1 ambiente)
        throws CategoriaJaDeclaradaException,CategoriaNaoDeclaradaException,
               ProcedimentoNaoDeclaradoException,ProcedimentoJaDeclaradoException {
-		ambiente.mapDefCategoria(nome, new DefCategoria(nome, metodos));
-		return ambiente;
-	}
+		// ambiente.mapDefCategoria(nome, new DefCategoria(nome, metodos));
+		// return ambiente;
+        return ambiente;
+	}    
+    
 }
+    
+ 

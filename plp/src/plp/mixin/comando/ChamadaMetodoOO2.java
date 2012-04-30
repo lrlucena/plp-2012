@@ -24,7 +24,7 @@ import plp.orientadaObjetos1.memoria.DefClasse;
 import plp.orientadaObjetos1.memoria.Objeto;
 import plp.orientadaObjetos1.memoria.colecao.ListaValor;
 import plp.orientadaObjetos1.util.Tipo;
-import plp.mixin.memoria.AmbienteExecucaoOO2;
+import plp.mixin.memoria.AmbienteExecucaoMixin;
 import plp.mixin.memoria.DefClasseOO2;
 
 public class ChamadaMetodoOO2 extends ChamadaMetodo {
@@ -64,13 +64,13 @@ public class ChamadaMetodoOO2 extends ChamadaMetodo {
 	    ValorRef vr = (ValorRef) expressao.avaliar(ambiente);  // recupera o id do objeto
 	    Objeto objeto =  ambiente.getObjeto(vr);               // recupera o objeto
 	    Id idClasse = objeto.getClasse();                      // recupera o tipo do objeto
-	    DefClasse defClasse = ambiente.getDefClasse((plp.expressions2.expression.Id)idClasse); // recupera a definição da classe
+	    DefClasse defClasse = ambiente.getDefClasse((plp.expressions2.expression.Id)idClasse); // recupera a definiï¿½ï¿½o da classe
 	    Procedimento metodo = this.getProcedimentoHierarquia(ambiente, (DefClasseOO2) defClasse, nomeMetodo); // recupera o procedimento
 	    // cria um novo ambiente para a execucao, pois
-	    // não deve levar em conta as variáveis definidas na main
+	    // nï¿½o deve levar em conta as variï¿½veis definidas na main
 	    AmbienteExecucaoOO1 aux = new ContextoExecucaoOO1(ambiente);
-	                                                           // é change pois no construtor do ambiente
-	    aux.changeValor(new Id("this"),vr);                    // invocado na linha anterior ja é feito
+	                                                           // ï¿½ change pois no construtor do ambiente
+	    aux.changeValor(new Id("this"),vr);                    // invocado na linha anterior ja ï¿½ feito
 	                                                           //  um mapeamento
 
 	    ListaValor valoresDosParametros = parametrosReais.avaliar(ambiente);
@@ -81,10 +81,10 @@ public class ChamadaMetodoOO2 extends ChamadaMetodo {
     public boolean checaTipo(AmbienteCompilacaoOO1 ambiente) throws VariavelNaoDeclaradaException,
     			VariavelJaDeclaradaException, ClasseNaoDeclaradaException {
         boolean resposta;
-        //Antes de incrementar o ambiente, verifico se o método
-        //é válido para a definicao de classe obtida a partir de expressao.
-        //Se não for válido, a exceção ProcedimentoNaoDeclaradoException será
-        //lançada e checaTipo retornará false.
+        //Antes de incrementar o ambiente, verifico se o mï¿½todo
+        //ï¿½ vï¿½lido para a definicao de classe obtida a partir de expressao.
+        //Se nï¿½o for vï¿½lido, a exceï¿½ï¿½o ProcedimentoNaoDeclaradoException serï¿½
+        //lanï¿½ada e checaTipo retornarï¿½ false.
         Tipo tipoClasse = expressao.getTipo(ambiente);
         DefClasse defClasse = ambiente.getDefClasse(tipoClasse.getTipo());
         try {

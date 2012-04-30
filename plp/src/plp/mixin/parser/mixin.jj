@@ -21,7 +21,6 @@ import plp.orientadaObjetos1.comando.Write;
 import plp.orientadaObjetos1.comando.Procedimento;
 import plp.orientadaObjetos1.declaracao.Declaracao;
 import plp.orientadaObjetos1.declaracao.classe.DecClasse;
-import plp.mixin.declaracao.classe.DecCategoria;
 import plp.mixin.declaracao.classe.DecCategoriaSimples;
 import plp.orientadaObjetos1.declaracao.procedimento.DecParametro;
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimento;
@@ -59,8 +58,8 @@ import plp.mixin.Programa;
 import plp.mixin.declaracao.DecConstrutor;
 import plp.mixin.declaracao.ListaDeclaracaoOO;
 import plp.mixin.declaracao.classe.DecClasseSimplesOO2;
-import plp.mixin.memoria.ContextoCompilacaoOO2;
-import plp.mixin.memoria.ContextoExecucaoOO2;
+import plp.mixin.memoria.ContextoCompilacaoMixin;
+import plp.mixin.memoria.ContextoExecucaoMixin;
 import plp.mixin.comando.*;
 import plp.mixin.expressao.leftExpression.*;
 import plp.mixin.declaracao.variavel.DecVariavelObjetoOO2;
@@ -109,9 +108,9 @@ public class MixinParser
     {
       Programa programa = parser.processaEntrada();
       System.out.println("OO2 PLP Parser Version 0.0.1:  OO2 program parsed successfully.");
-      if (programa.checaTipo(new ContextoCompilacaoOO2(new ListaValor())))
+      if (programa.checaTipo(new ContextoCompilacaoMixin(new ListaValor())))
       {
-        programa.executar(new ContextoExecucaoOO2());
+        programa.executar(new ContextoExecucaoMixin());
       }
       else
       {
@@ -1087,7 +1086,7 @@ ListaDeclaracaoOO PListaDeclaracaoOO() :
 {
 	ListaDeclaracaoOO retorno;
 	DecClasse decClasse;
-	DecCategoria decCategoria;
+	DecCategoriaSimples decCategoria;
 }
 {
   (
@@ -1119,13 +1118,13 @@ ListaDeclaracaoOO PListaDeclaracaoOO() :
  * DecCategoria ::= "categoria" Id "{" DecProcedimento "}"
  **/
 
-DecCategoria PDecCategoriaAtomica() :
+DecCategoriaSimples PDecCategoriaAtomica() :
 {
   Id nome;
   DecProcedimento metodos;
 }
 {
-	     <CLASSE> nome = PId()
+	     <CATEGORIA> nome = PId()
 	     <LBRACE>
 		metodos = PDecProcedimento()
              <RBRACE>
@@ -1140,7 +1139,7 @@ DecCategoria PDecCategoriaAtomica() :
  **/
 ListaDeclaracaoOO PDecCategoriaComposta() :
 {
-  DecCategoria d1;
+  DecCategoriaSimples d1;
   ListaDeclaracaoOO d2;
 }
 {

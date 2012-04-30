@@ -24,8 +24,8 @@ import plp.orientadaObjetos1.memoria.AmbienteExecucaoOO1;
 import plp.orientadaObjetos1.memoria.ContextoExecucaoOO1;
 import plp.orientadaObjetos1.memoria.Objeto;
 import plp.orientadaObjetos1.memoria.colecao.ListaValor;
-import plp.mixin.memoria.AmbienteExecucaoOO2;
-import plp.mixin.memoria.ContextoExecucaoOO2;
+import plp.mixin.memoria.ContextoExecucaoMixin;
+import plp.mixin.memoria.AmbienteExecucaoMixin;
 import plp.mixin.memoria.DefClasseOO2;
 
 public class NewOO2 extends New {
@@ -37,7 +37,7 @@ public class NewOO2 extends New {
 		this.parametrosReais = parametrosReais;
 	}
 
-	private void extendsClasse(AmbienteExecucaoOO2 ambiente, DefClasseOO2 classe, Objeto objeto) throws ClasseNaoDeclaradaException,
+	private void extendsClasse(AmbienteExecucaoMixin ambiente, DefClasseOO2 classe, Objeto objeto) throws ClasseNaoDeclaradaException,
 				VariavelNaoDeclaradaException, VariavelJaDeclaradaException, ObjetoNaoDeclaradoException,
 				ClasseJaDeclaradaException, ObjetoJaDeclaradoException {
 		if (classe.getNomeSuperClasse() != null) {
@@ -58,7 +58,7 @@ public class NewOO2 extends New {
 	}
 
 
-	public AmbienteExecucaoOO2 executar(AmbienteExecucaoOO2 ambiente)
+	public AmbienteExecucaoMixin executar(AmbienteExecucaoMixin ambiente)
 			throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException, ClasseJaDeclaradaException, ClasseNaoDeclaradaException,
 			ObjetoJaDeclaradoException, ObjetoNaoDeclaradoException, ProcedimentoNaoDeclaradoException,
 			ProcedimentoJaDeclaradoException, EntradaInvalidaException {
@@ -81,7 +81,7 @@ public class NewOO2 extends New {
 
 
 		Procedimento metodo = defClasse.getConstrutor().getProcedimento();
-		AmbienteExecucaoOO2 aux = new ContextoExecucaoOO2(ambiente);
+		AmbienteExecucaoMixin aux = new ContextoExecucaoMixin(ambiente);
 
 		aux.changeValor(new Id("this"), vr);
 

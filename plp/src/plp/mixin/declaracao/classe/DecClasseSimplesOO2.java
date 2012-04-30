@@ -13,8 +13,8 @@ import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos1.util.TipoClasse;
 import plp.mixin.declaracao.ConstrutorNaoDeclaradoException;
 import plp.mixin.declaracao.DecConstrutor;
-import plp.mixin.memoria.AmbienteCompilacaoOO2;
-import plp.mixin.memoria.AmbienteExecucaoOO2;
+import plp.mixin.memoria.AmbienteCompilacaoMixin;
+import plp.mixin.memoria.AmbienteExecucaoMixin;
 import plp.mixin.memoria.DefClasseOO2;
 
 public class DecClasseSimplesOO2 extends DecClasseSimples {
@@ -38,21 +38,21 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 	}
 
 	/**
-	 * Cria um mapeamento do identificador para a declaração desta classe.
+	 * Cria um mapeamento do identificador para a declaraï¿½ï¿½o desta classe.
 	 *
 	 * @param ambiente
 	 *            o ambiente que contem o mapeamento entre identificadores e
 	 *            valores.
-	 * @return o ambiente modificado pela declaração da classe.
+	 * @return o ambiente modificado pela declaraï¿½ï¿½o da classe.
 	 * @throws ConstrutorNaoDeclaradoException
 	 */
-	public AmbienteExecucaoOO2 elabora(AmbienteExecucaoOO2 ambiente)
+	public AmbienteExecucaoMixin elabora(AmbienteExecucaoMixin ambiente)
 			throws ClasseJaDeclaradaException, ClasseNaoDeclaradaException, ConstrutorNaoDeclaradoException {
 
 		// Adiciona a classe no mapeameento de classes
 		ambiente.mapDefClasse(nomeClasse, new DefClasseOO2(nomeClasse, nomeSuperClasse, this.atributos, construtor, metodos));
 
-		// Verifica se a super classe j‡ foi declarada
+		// Verifica se a super classe jï¿½ foi declarada
 		if (nomeSuperClasse != null) {
 			ambiente.mapSuperClasse(nomeClasse, nomeSuperClasse);
 		}
@@ -71,13 +71,13 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 	 *         <code>false</code> caso contrario.
 	 * @throws ConstrutorNaoDeclaradoException
 	 */
-	public boolean checaTipo (AmbienteCompilacaoOO2 ambiente)
+	public boolean checaTipo (AmbienteCompilacaoMixin ambiente)
 			throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
 			ClasseJaDeclaradaException, ClasseNaoDeclaradaException,
 			ProcedimentoNaoDeclaradoException,
 			ProcedimentoJaDeclaradoException, ConstrutorNaoDeclaradoException {
 
-		// Verifica se a super classe j‡ foi declarada
+		// Verifica se a super classe jï¿½ foi declarada
 		if (nomeSuperClasse != null) {
 			ambiente.mapSuperClasse(nomeClasse, nomeSuperClasse);
 		}
@@ -98,7 +98,7 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 			resposta =  metodos.checaTipo(ambiente);
 		}
 
-		//Verifica se construtor est‡ declarado corretamente
+		//Verifica se construtor estï¿½ declarado corretamente
 		resposta = resposta && construtor.checaTipo(ambiente);
 
 		ambiente.restaura();
@@ -106,7 +106,7 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 		return resposta;
 	}
 
-	private void checaTipoVariaveisClasseMae(AmbienteCompilacaoOO2 ambiente, Id nomeSuperClasse) throws ClasseNaoDeclaradaException, VariavelJaDeclaradaException, VariavelNaoDeclaradaException, ClasseJaDeclaradaException {
+	private void checaTipoVariaveisClasseMae(AmbienteCompilacaoMixin ambiente, Id nomeSuperClasse) throws ClasseNaoDeclaradaException, VariavelJaDeclaradaException, VariavelNaoDeclaradaException, ClasseJaDeclaradaException {
 		if (nomeSuperClasse != null) {
 			DefClasseOO2 defClasseMae = (DefClasseOO2) ambiente.getDefClasse(nomeSuperClasse);
 			defClasseMae.getDecVariavel().checaTipo(ambiente);
