@@ -1,6 +1,7 @@
 package plp;
 
 import java.applet.Applet;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Panel;
 
@@ -23,20 +24,20 @@ public class AppletInterpretadorPLP extends Applet {
 			12);
 
 	private JPanel jContentPane = null;
-	private JTextArea jTextAreaCodigo = null;
+	JTextArea jTextAreaCodigo = null;
 	private JScrollPane jScrollPaneMensagens = null;
 	private JTextArea jTextAreaMensagens = null;
 	private JLabel jLabelCodigo = null;
 	private JLabel jLabelMasg = null;
 	private JScrollPane jScrollPaneCodigo = null;
-	private JComboBox jComboBoxLinguagens = null;
+	JComboBox jComboBoxLinguagens = null;
 	private JLabel jLabelExecutar = null;
 
 	private JButton jButtonExecutar = null;
-	private JTextField jTextFieldListaEntrada = null;
+	JTextField jTextFieldListaEntrada = null;
 	private JLabel jLabelListaEntrada = null;
 
-	private MultiInterpretador interpreter;
+	MultiInterpretador interpreter;
 
 	/**
 	 * This is the default constructor
@@ -190,7 +191,7 @@ public class AppletInterpretadorPLP extends Applet {
 			jComboBoxLinguagens.addItem("Imperativa 2");
 			jComboBoxLinguagens.addItem("Orientada a Objetos 1");
 			jComboBoxLinguagens.addItem("Orientada a Objetos 2");			
-			
+			jComboBoxLinguagens.addItem("Mixin");
 
 		}
 		return jComboBoxLinguagens;
@@ -256,3 +257,27 @@ public class AppletInterpretadorPLP extends Applet {
 	}
 } // @jve:decl-index=0:visual-constraint="10,10"
 
+//class AppletInterpretadorKeyListener implements KeyListener {
+//
+//	AppletInterpretadorPLP frame;
+//
+//	public AppletInterpretadorKeyListener(AppletInterpretadorPLP frm) {
+//		super();
+//		this.frame = frm;
+//	}
+//
+//	public void keyPressed(java.awt.event.KeyEvent e) {
+//		if (e.getKeyCode() == KeyEvent.VK_F1) {
+//			String sourceCode = this.frame.jTextAreaCodigo.getText();
+//			String listaEntrada = this.frame.jTextFieldListaEntrada.getText();
+//			this.frame.interpreter.interpretarCodigo(sourceCode, listaEntrada,
+//					this.frame.jComboBoxLinguagens.getSelectedIndex());
+//		}
+//	}
+//
+//	public void keyReleased(KeyEvent arg0) {
+//	}
+//
+//	public void keyTyped(KeyEvent arg0) {
+//	}
+//}

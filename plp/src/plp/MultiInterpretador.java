@@ -26,6 +26,7 @@ import plp.imperative2.parser.Imp2Parser;
 import plp.orientadaObjetos1.expressao.valor.ValorConcreto;
 import plp.orientadaObjetos1.parser.OO1Parser;
 import plp.orientadaObjetos2.parser.OO2Parser;
+import plp.mixin.parser.MixinParser;
 
 public class MultiInterpretador {
 
@@ -46,6 +47,8 @@ public class MultiInterpretador {
 	private static final int OO1 = 7;
 
 	private static final int OO2 = 8;
+	
+	private static final int MIXIN = 9;
 
 	private JTextArea messageBoard;
 
@@ -58,6 +61,7 @@ public class MultiInterpretador {
 	private Imp2Parser imp2Parser = null;
 	private OO1Parser oo1Parser = null;
 	private OO2Parser oo2Parser = null;
+	private MixinParser mixinParser = null;
 
 	public MultiInterpretador(JTextArea textAreaMensagens) {
 		super();
@@ -97,6 +101,9 @@ public class MultiInterpretador {
 				break;
 			case OO2:
 				interpretarOO2(fis, listaEntrada);
+				break;
+			case MIXIN:
+				interpretarMixin(fis, listaEntrada);
 			}
 		} catch (Exception e1) {
 			messageBoard.setText(e1.getMessage());
@@ -272,6 +279,29 @@ public class MultiInterpretador {
 					.append("resultado = "
 							+ prog.executar(
 									new plp.orientadaObjetos2.memoria.ContextoExecucaoOO2(
+											entrada)).toString());
+		} else {
+			messageBoard.append("erro de tipos!");
+		}
+	}
+	
+	private void interpretarMixin(InputStream fis, String entradaStr) throws Exception {
+		plp.mixin.Programa prog;
+		if (mixinParser == null) {
+			this.mixinParser = new MixinParser(fis);
+		} else {
+			mixinParser.ReInit(fis);
+		}
+		prog = mixinParser.processaEntrada();
+
+		messageBoard.setText("sintaxe verificada com sucesso!\n");
+		plp.orientadaObjetos1.memoria.colecao.ListaValor entrada = obterListaEntrada2(entradaStr);
+		if (prog.checaTipo(new plp.mixin.memoria.ContextoCompilacaoMixin(
+				entrada))) {
+			messageBoard
+					.append("resultado = "
+							+ prog.executar(
+									new plp.mixin.memoria.ContextoExecucaoMixin(
 											entrada)).toString());
 		} else {
 			messageBoard.append("erro de tipos!");

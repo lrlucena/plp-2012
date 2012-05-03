@@ -208,7 +208,8 @@ public class InterpretadorPLP extends JFrame {
 			jComboBoxLinguagens.addItem("Imperativa 1");
 			jComboBoxLinguagens.addItem("Imperativa 2");
 			jComboBoxLinguagens.addItem("Orientada a Objetos 1");
-			jComboBoxLinguagens.addItem("Orientada a Objetos 2");			
+			jComboBoxLinguagens.addItem("Orientada a Objetos 2");
+			jComboBoxLinguagens.addItem("Mixin");
 
 		}
 		return jComboBoxLinguagens;
