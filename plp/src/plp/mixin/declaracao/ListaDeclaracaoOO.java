@@ -15,7 +15,6 @@ import plp.mixin.memoria.AmbienteExecucaoMixin;
 import plp.orientadaObjetos1.declaracao.Declaracao;
 import plp.orientadaObjetos1.declaracao.classe.DecClasseSimples;
 
-
 public class ListaDeclaracaoOO extends Lista<Declaracao> {
 	/**
 	 * Construtor.
@@ -25,7 +24,7 @@ public class ListaDeclaracaoOO extends Lista<Declaracao> {
 
 	/**
 	 * Construtor.
-	 *
+	 * 
 	 * @param DeclaracaoOO
 	 *            DeclaracaoOO que compoe a tail.
 	 */
@@ -33,13 +32,13 @@ public class ListaDeclaracaoOO extends Lista<Declaracao> {
 		super(decOO, new ListaDeclaracaoOO());
 	}
 
-        public ListaDeclaracaoOO(DecCategoriaSimples decOO) {
+	public ListaDeclaracaoOO(DecCategoriaSimples decOO) {
 		super(decOO, new ListaDeclaracaoOO());
 	}
 
 	/**
 	 * Construtor.
-	 *
+	 * 
 	 * @param declaracaoOO
 	 *            Primeira declaracao da tail.
 	 * @param listaDeclaracaoOO
@@ -52,19 +51,35 @@ public class ListaDeclaracaoOO extends Lista<Declaracao> {
 	public ListaDeclaracaoOO(DecCategoriaSimples decOO, ListaDeclaracaoOO lista) {
 		super(decOO, lista);
 	}
-        
+
 	public AmbienteExecucaoMixin elabora(AmbienteExecucaoMixin ambiente)
 			throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
 			ClasseJaDeclaradaException, ClasseNaoDeclaradaException,
-			ProcedimentoNaoDeclaradoException, ProcedimentoJaDeclaradoException, ConstrutorNaoDeclaradoException {
+			ProcedimentoNaoDeclaradoException,
+			ProcedimentoJaDeclaradoException, ConstrutorNaoDeclaradoException {
 
 		if (length() == 1) {
-			DecClasseSimplesOO2 classe = (DecClasseSimplesOO2) getHead();
-			classe.elabora(ambiente);
+			Declaracao d = getHead();
+			if (d instanceof DecCategoriaSimples) {
+				((DecCategoriaSimples) d).elabora(ambiente);
+			} else {
+				((DecClasseSimplesOO2) d).elabora(ambiente);
+			}
+			
+			// DecClasseSimplesOO2 classe = (DecClasseSimplesOO2) getHead();
+			// classe.elabora(ambiente);
 		} else {
-			DecClasseSimplesOO2 classe = (DecClasseSimplesOO2) getHead();
-			classe.elabora(ambiente);
-			((ListaDeclaracaoOO)getTail()).elabora(ambiente);
+			Declaracao d = getHead();
+			if (d instanceof DecCategoriaSimples) {
+				((DecCategoriaSimples) d).elabora(ambiente);
+			} else {
+				((DecClasseSimplesOO2) d).elabora(ambiente);
+			}
+			((ListaDeclaracaoOO) getTail()).elabora(ambiente);
+			
+//			DecClasseSimplesOO2 classe = (DecClasseSimplesOO2) getHead();
+//			classe.elabora(ambiente);
+//			((ListaDeclaracaoOO) getTail()).elabora(ambiente);
 		}
 
 		return ambiente;
@@ -73,25 +88,26 @@ public class ListaDeclaracaoOO extends Lista<Declaracao> {
 	public boolean checaTipo(AmbienteCompilacaoMixin ambiente)
 			throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
 			ClasseJaDeclaradaException, ClasseNaoDeclaradaException,
-			ProcedimentoNaoDeclaradoException, ProcedimentoJaDeclaradoException, ConstrutorNaoDeclaradoException {
+			ProcedimentoNaoDeclaradoException,
+			ProcedimentoJaDeclaradoException, ConstrutorNaoDeclaradoException {
 
 		boolean ret = false;
 		if (length() == 1) {
 			Declaracao d = getHead();
-                        if (d instanceof DecCategoriaSimples) {
-                            ret = ((DecCategoriaSimples)d).checaTipo(ambiente);
-                        } else {
-                            ret = ((DecClasseSimplesOO2)d).checaTipo(ambiente);
-                        }
+			if (d instanceof DecCategoriaSimples) {
+				ret = ((DecCategoriaSimples) d).checaTipo(ambiente);
+			} else {
+				ret = ((DecClasseSimplesOO2) d).checaTipo(ambiente);
+			}
 		} else {
 			Declaracao d = getHead();
-                        if (d instanceof DecCategoriaSimples) {
-                            ret = ((DecCategoriaSimples)d).checaTipo(ambiente);
-                        } else {
-                            ret = ((DecClasseSimplesOO2)d).checaTipo(ambiente);
-                        }
+			if (d instanceof DecCategoriaSimples) {
+				ret = ((DecCategoriaSimples) d).checaTipo(ambiente);
+			} else {
+				ret = ((DecClasseSimplesOO2) d).checaTipo(ambiente);
+			}
 			if (ret)
-				ret = ((ListaDeclaracaoOO)getTail()).checaTipo(ambiente);
+				ret = ((ListaDeclaracaoOO) getTail()).checaTipo(ambiente);
 		}
 
 		return ret;

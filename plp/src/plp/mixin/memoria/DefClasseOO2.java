@@ -5,6 +5,7 @@ import plp.orientadaObjetos1.declaracao.variavel.DecVariavel;
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos1.memoria.DefClasse;
 import plp.mixin.declaracao.DecConstrutor;
+import plp.mixin.util.ListaID;
 
 public class DefClasseOO2 extends DefClasse {
 
@@ -12,17 +13,20 @@ public class DefClasseOO2 extends DefClasse {
 	 * Nome super classe
 	 */
 	private Id nomeSuperClasse;
+	
+	private ListaID categorias;
 
 	/**
 	 * Consturtor
 	 */
 	private DecConstrutor construtor;
 
-	public DefClasseOO2(Id idClasse, Id nomeSuperClasse,DecVariavel decVariavel,
+	public DefClasseOO2(Id idClasse, Id nomeSuperClasse,ListaID categorias,DecVariavel decVariavel,
 			DecConstrutor construtor, DecProcedimento decProcedimento) {
 		super(idClasse, decVariavel, decProcedimento);
 		this.nomeSuperClasse = nomeSuperClasse;
 		this.construtor = construtor;
+		this.setCategorias(categorias);
 	}
 
 	public DecConstrutor getConstrutor() {
@@ -45,5 +49,13 @@ public class DefClasseOO2 extends DefClasse {
 	 */
 	public void setNomeSuperClasse(Id nomeSuperClasse) {
 		this.nomeSuperClasse = nomeSuperClasse;
+	}
+
+	public void setCategorias(ListaID categorias) {
+		this.categorias = categorias;
+	}
+
+	public ListaID getCategorias() {
+		return categorias;
 	}
 }

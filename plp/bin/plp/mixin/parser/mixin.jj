@@ -63,6 +63,7 @@ import plp.mixin.memoria.ContextoExecucaoMixin;
 import plp.mixin.comando.*;
 import plp.mixin.expressao.leftExpression.*;
 import plp.mixin.declaracao.variavel.DecVariavelObjetoOO2;
+import plp.mixin.util.ListaID;
 
 /**
  * Parser para a Linguagem de Programaco Orientada a Objetos 2
@@ -214,6 +215,11 @@ TOKEN : /* TOKENS DE OO1 */
 TOKEN : /* TOKENS DE OO2 */
 {
   < EXTENDS : "extends" >
+}
+
+TOKEN : /* TOKENS DE OO2-mixin */
+{
+  < MIXIN : "mixin" >
 }
 
 TOKEN : /* TOKENS DOS POSS�VEIS TIPOS */
@@ -1151,13 +1157,14 @@ ListaDeclaracaoOO PDecCategoriaComposta() :
 
 
 /**
- * DecClasse ::= "classe" Id ["extends" Id] "{" DecVariavel ";" DecConstrutor ";" DecProcedimento "}"
+ * DecClasse ::= "classe" Id ["extends" Id] ["mixin" ListaId] "{" DecVariavel ";" DecConstrutor ";" DecProcedimento "}"
  **/
 
 DecClasse PDecClasseAtomica() :
 {
   Id nomeClasse;
   Id superClasse = null;
+  ListaID categoria = null;
   DecVariavel atributos;
   DecConstrutor decConstrutor = null;
   DecProcedimento metodos;
@@ -1175,6 +1182,32 @@ DecClasse PDecClasseAtomica() :
 			<RBRACE>
 			{
 				resposta = new DecClasseSimplesOO2(nomeClasse, superClasse, atributos, decConstrutor, metodos);
+			}
+		)
+		|
+		LOOKAHEAD(<CLASSE> PId() <MIXIN> PListaID())
+		(
+			<CLASSE> nomeClasse = PId() <MIXIN> categoria = PListaID()
+			<LBRACE>
+				atributos = PDecVariavel() <SEMICOLON>
+				decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
+				metodos = PDecProcedimento()
+			<RBRACE>
+			{
+				resposta = new DecClasseSimplesOO2(nomeClasse, superClasse, categoria, atributos, decConstrutor, metodos);
+			}
+		)
+		|
+		LOOKAHEAD(<CLASSE> PId() <EXTENDS> PId() <MIXIN> PListaID())
+		(
+			<CLASSE> nomeClasse = PId() <EXTENDS> superClasse = PId() <MIXIN> categoria = PListaID()
+			<LBRACE>
+				atributos = PDecVariavel() <SEMICOLON>
+				decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
+				metodos = PDecProcedimento()
+			<RBRACE>
+			{
+				resposta = new DecClasseSimplesOO2(nomeClasse, superClasse, categoria, atributos, decConstrutor, metodos);
 			}
 		)
 		|
@@ -1522,5 +1555,42 @@ Tipo PTipoClasse() :
   )
   {
     return retorno;
+  }
+}
+
+/**
+ * ListaID ::= Id | Id "," ListaId
+ **/
+ListaID PListaID() :
+{
+  ListaID retorno;
+  Id id;
+}
+{
+  (
+    LOOKAHEAD(PId() < COMMA >)
+    retorno = PIdComposto()
+  | id = PId()
+    {
+      retorno = new ListaID(id);
+    }
+  )
+  {
+    return retorno;
+  }
+}
+
+/**
+ * ... Id "," ListaID
+ **/
+ListaID PIdComposto() :
+{
+  Id id1;
+  ListaID id2;
+}
+{
+  id1 = PId() < COMMA > id2 = PListaID()
+  {
+    return new ListaID(id1, id2);
   }
 }

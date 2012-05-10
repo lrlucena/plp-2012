@@ -82,7 +82,7 @@ public class Id extends plp.expressions2.expression.Id implements LeftExpression
      * @return o valor do Objeto representado por um certo id
      * @throws VariavelNaoDeclaradaException 
      */
-    private Valor obterValorDeIdNoAmbiente(AmbienteExecucaoOO1 ambiente)
+    public Valor obterValorDeIdNoAmbiente(AmbienteExecucaoOO1 ambiente)
             throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException {
         return ambiente.get(this);
     }

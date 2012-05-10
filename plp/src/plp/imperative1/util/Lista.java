@@ -32,6 +32,21 @@ public class Lista<T> {
 	public Lista<T> getTail() {
 		return tail;
 	}
+	
+	private T getI(int pos, int i, Lista<T> lista){
+		 
+		if(pos == i){
+			return lista.head;
+		} else {
+			return getI(pos+1, i, lista.tail);
+		}
+		
+	}
+	
+	public T get(int i) throws ArrayIndexOutOfBoundsException {
+			
+		return getI(0, i, this);
+	}
 
 	@Override
 	public String toString() {

@@ -2,6 +2,7 @@ package plp.mixin.declaracao.classe;
 
 import plp.expressions2.memory.VariavelJaDeclaradaException;
 import plp.expressions2.memory.VariavelNaoDeclaradaException;
+import plp.imperative1.util.Lista;
 import plp.orientadaObjetos1.declaracao.classe.DecClasseSimples;
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimento;
 import plp.orientadaObjetos1.declaracao.variavel.DecVariavel;
@@ -16,6 +17,7 @@ import plp.mixin.declaracao.DecConstrutor;
 import plp.mixin.memoria.AmbienteCompilacaoMixin;
 import plp.mixin.memoria.AmbienteExecucaoMixin;
 import plp.mixin.memoria.DefClasseOO2;
+import plp.mixin.util.ListaID;
 
 public class DecClasseSimplesOO2 extends DecClasseSimples {
 
@@ -28,6 +30,11 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 	 * Declarassa do construtor
 	 */
 	private DecConstrutor construtor;
+	
+	/**
+	 * Identificador da categoria
+	 */
+	private ListaID categorias;
 
     public DecClasseSimplesOO2(Id nomeClasse, Id nomeSuperClasse, DecVariavel atributos,
 			DecConstrutor construtor, DecProcedimento metodos) {
@@ -35,6 +42,16 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 
 		this.construtor = construtor;
 		this.nomeSuperClasse = nomeSuperClasse;
+	}
+    
+    public DecClasseSimplesOO2(Id nomeClasse, Id nomeSuperClasse, ListaID categorias,
+			DecVariavel atributos, DecConstrutor construtor,
+			DecProcedimento metodos) {
+		
+    	super(nomeClasse, atributos, metodos);
+    	this.construtor = construtor;
+		this.nomeSuperClasse = nomeSuperClasse;
+		this.categorias = categorias;
 	}
 
 	/**
@@ -50,7 +67,7 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 			throws ClasseJaDeclaradaException, ClasseNaoDeclaradaException, ConstrutorNaoDeclaradoException {
 
 		// Adiciona a classe no mapeameento de classes
-		ambiente.mapDefClasse(nomeClasse, new DefClasseOO2(nomeClasse, nomeSuperClasse, this.atributos, construtor, metodos));
+		ambiente.mapDefClasse(nomeClasse, new DefClasseOO2(nomeClasse, nomeSuperClasse, categorias,this.atributos, construtor, metodos));
 
 		// Verifica se a super classe j� foi declarada
 		if (nomeSuperClasse != null) {
@@ -81,9 +98,13 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 		if (nomeSuperClasse != null) {
 			ambiente.mapSuperClasse(nomeClasse, nomeSuperClasse);
 		}
+		
+		if (categorias != null) {
+			ambiente.mapClasseCategoria(nomeClasse, categorias);
+		}
 
 		// Adiciona a classe no mapeameento de classes
-		ambiente.mapDefClasse(nomeClasse, new DefClasseOO2(nomeClasse, nomeSuperClasse, this.atributos, construtor, metodos));
+		ambiente.mapDefClasse(nomeClasse, new DefClasseOO2(nomeClasse, nomeSuperClasse, categorias, this.atributos, construtor, metodos));
 
 		boolean resposta = false;
 		ambiente.incrementa();

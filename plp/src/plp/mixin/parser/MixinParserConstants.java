@@ -61,91 +61,93 @@ public interface MixinParserConstants {
   /** RegularExpression Id. */
   int EXTENDS = 30;
   /** RegularExpression Id. */
-  int INT = 31;
+  int MIXIN = 31;
   /** RegularExpression Id. */
-  int BOOLEAN = 32;
+  int INT = 32;
   /** RegularExpression Id. */
-  int STRING = 33;
+  int BOOLEAN = 33;
   /** RegularExpression Id. */
-  int INTEGER_LITERAL = 34;
+  int STRING = 34;
   /** RegularExpression Id. */
-  int DECIMAL_LITERAL = 35;
+  int INTEGER_LITERAL = 35;
   /** RegularExpression Id. */
-  int HEX_LITERAL = 36;
+  int DECIMAL_LITERAL = 36;
   /** RegularExpression Id. */
-  int OCTAL_LITERAL = 37;
+  int HEX_LITERAL = 37;
   /** RegularExpression Id. */
-  int STRING_LITERAL = 38;
+  int OCTAL_LITERAL = 38;
   /** RegularExpression Id. */
-  int IDENTIFIER = 39;
+  int STRING_LITERAL = 39;
   /** RegularExpression Id. */
-  int LETTER = 40;
+  int IDENTIFIER = 40;
   /** RegularExpression Id. */
-  int DIGIT = 41;
+  int LETTER = 41;
   /** RegularExpression Id. */
-  int LPAREN = 42;
+  int DIGIT = 42;
   /** RegularExpression Id. */
-  int RPAREN = 43;
+  int LPAREN = 43;
   /** RegularExpression Id. */
-  int LBRACE = 44;
+  int RPAREN = 44;
   /** RegularExpression Id. */
-  int RBRACE = 45;
+  int LBRACE = 45;
   /** RegularExpression Id. */
-  int LBRACKET = 46;
+  int RBRACE = 46;
   /** RegularExpression Id. */
-  int RBRACKET = 47;
+  int LBRACKET = 47;
   /** RegularExpression Id. */
-  int SEMICOLON = 48;
+  int RBRACKET = 48;
   /** RegularExpression Id. */
-  int COMMA = 49;
+  int SEMICOLON = 49;
   /** RegularExpression Id. */
-  int DOT = 50;
+  int COMMA = 50;
   /** RegularExpression Id. */
-  int ATTRIB = 51;
+  int DOT = 51;
   /** RegularExpression Id. */
-  int ASSIGN = 52;
+  int ATTRIB = 52;
   /** RegularExpression Id. */
-  int GT = 53;
+  int ASSIGN = 53;
   /** RegularExpression Id. */
-  int LT = 54;
+  int GT = 54;
   /** RegularExpression Id. */
-  int BANG = 55;
+  int LT = 55;
   /** RegularExpression Id. */
-  int TILDE = 56;
+  int BANG = 56;
   /** RegularExpression Id. */
-  int HOOK = 57;
+  int TILDE = 57;
   /** RegularExpression Id. */
-  int COLON = 58;
+  int HOOK = 58;
   /** RegularExpression Id. */
-  int EQ = 59;
+  int COLON = 59;
   /** RegularExpression Id. */
-  int LE = 60;
+  int EQ = 60;
   /** RegularExpression Id. */
-  int GE = 61;
+  int LE = 61;
   /** RegularExpression Id. */
-  int NE = 62;
+  int GE = 62;
   /** RegularExpression Id. */
-  int SC_OR = 63;
+  int NE = 63;
   /** RegularExpression Id. */
-  int SC_AND = 64;
+  int SC_OR = 64;
   /** RegularExpression Id. */
-  int CONCAT = 65;
+  int SC_AND = 65;
   /** RegularExpression Id. */
-  int PLUS = 66;
+  int CONCAT = 66;
   /** RegularExpression Id. */
-  int MINUS = 67;
+  int PLUS = 67;
   /** RegularExpression Id. */
-  int STAR = 68;
+  int MINUS = 68;
   /** RegularExpression Id. */
-  int SLASH = 69;
+  int STAR = 69;
   /** RegularExpression Id. */
-  int BIT_AND = 70;
+  int SLASH = 70;
   /** RegularExpression Id. */
-  int BIT_OR = 71;
+  int BIT_AND = 71;
   /** RegularExpression Id. */
-  int XOR = 72;
+  int BIT_OR = 72;
   /** RegularExpression Id. */
-  int REM = 73;
+  int XOR = 73;
+  /** RegularExpression Id. */
+  int REM = 74;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -183,6 +185,7 @@ public interface MixinParserConstants {
     "\"null\"",
     "\"proc\"",
     "\"extends\"",
+    "\"mixin\"",
     "\"int\"",
     "\"boolean\"",
     "\"string\"",
