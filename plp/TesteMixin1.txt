@@ -1,0 +1,43 @@
+{
+	classe Contador  {
+
+		int valor = 0;
+
+		Contador(int i){
+			this.valor := i
+		},
+
+		proc print() {
+			write(this.valor)
+		}
+
+	},
+	
+	categoria Contadores  {
+
+		proc print2() {
+			write("Testando Mixin")
+		}
+
+	},
+	
+	classe Contador2 mixin Contadores {
+		int valor = 0;
+
+		Contador2(int i){
+			this.valor := i
+		},
+
+		proc print() {
+			write(this.valor)
+		}
+	};
+
+	{
+		Contador cont := new Contador(1),
+		Contador cont2 := new Contador(2);
+		cont.print();
+		cont2.print()
+	}
+
+}
