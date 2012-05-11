@@ -21,7 +21,7 @@ public class ContextoCompilacaoMixin extends ContextoCompilacaoOO1 implements
 	private ArrayList<SuperClasseMap> arraySuperClasse;
 
 	private HashMap<Id, DefCategoria> mapDefCategoria;
-	
+
 	private HashMap<Id, List<DefCategoria>> mapMixinCategoria;
 
 	public ContextoCompilacaoMixin(ListaValor entrada) {
@@ -34,6 +34,13 @@ public class ContextoCompilacaoMixin extends ContextoCompilacaoOO1 implements
 
 	public void mapDefCategoria(Id idArg, DefCategoria defCategoria)
 			throws CategoriaJaDeclaradaException {
+
+		// if(!mapDefCategoria.containsKey(idArg)){
+		// mapDefCategoria.put(idArg, defCategoria);
+		// } else {
+		// throw new CategoriaJaDeclaradaException(idArg);
+		// }
+
 		if (mapDefCategoria.put(idArg, defCategoria) != null) {
 			throw new CategoriaJaDeclaradaException(idArg);
 		}
@@ -44,7 +51,9 @@ public class ContextoCompilacaoMixin extends ContextoCompilacaoOO1 implements
 	 */
 	public void mapSuperClasse(Id classe, Id superClasse)
 			throws ClasseNaoDeclaradaException {
+
 		DefClasse defClasse = getDefClasse(superClasse);
+
 		if (defClasse != null) {
 			arraySuperClasse.add(new SuperClasseMap(classe, superClasse));
 		}
@@ -67,7 +76,7 @@ public class ContextoCompilacaoMixin extends ContextoCompilacaoOO1 implements
 
 	public List<DefCategoria> getClasseCategoria(Id classe)
 			throws CategoriaNaoDeclaradaException {
-		
+
 		return mapMixinCategoria.get(classe);
 	}
 
@@ -75,7 +84,7 @@ public class ContextoCompilacaoMixin extends ContextoCompilacaoOO1 implements
 			throws CategoriaNaoDeclaradaException {
 
 		List<DefCategoria> listaCategorias = new ArrayList<DefCategoria>();
-		
+
 		try {
 			for (int i = 0; i < categorias.length(); i++) {
 				listaCategorias.add(getDefCategoria(categorias.get(i)));
@@ -84,7 +93,7 @@ public class ContextoCompilacaoMixin extends ContextoCompilacaoOO1 implements
 			e.printStackTrace();
 		}
 
-		if (listaCategorias.isEmpty()) {
+		if (!listaCategorias.isEmpty()) {
 			mapMixinCategoria.put(classe, listaCategorias);
 		}
 
