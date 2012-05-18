@@ -13,7 +13,7 @@
 
 	},
 	
-	categoria Contadores  {
+	categoria Contadores1  {
 
 		proc print2() {
 			write("Testando Mixin")
@@ -21,7 +21,15 @@
 
 	},
 	
-	classe Contador2 mixin Contadores {
+	categoria Contadores2  {
+
+		proc print2() {
+			write("Testando Mixin")
+		}
+
+	},
+	
+	classe Contador2 mixin Contadores1, Contadores2 {
 		int valor = 0;
 
 		Contador2(int i){

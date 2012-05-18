@@ -1,5 +1,7 @@
 package plp.orientadaObjetos1.memoria;
 
+import java.util.List;
+
 import plp.expressions2.memory.VariavelNaoDeclaradaException;
 import plp.orientadaObjetos1.comando.Procedimento;
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimento;
@@ -72,5 +74,9 @@ public class DefClasse {
 
 	public Id getIdClasse() {
 		return idClasse;
+	}
+	
+	public List<String> getListProcedimentoNomes() throws ProcedimentoNaoDeclaradoException {		
+		return decProcedimento.getListProcedimentoNomes();
 	}
 }

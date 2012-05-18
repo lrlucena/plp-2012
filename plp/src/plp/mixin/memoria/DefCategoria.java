@@ -1,5 +1,8 @@
 package plp.mixin.memoria;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import plp.orientadaObjetos1.comando.Procedimento;
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimento;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
@@ -43,5 +46,9 @@ public class DefCategoria {
 
 	public Id getIdCategoria() {
 		return idCategoria;
+	}
+	
+	public List<String> getListProcedimentoNomes() throws ProcedimentoNaoDeclaradoException {		
+		return decProcedimento.getListProcedimentoNomes();
 	}
 }

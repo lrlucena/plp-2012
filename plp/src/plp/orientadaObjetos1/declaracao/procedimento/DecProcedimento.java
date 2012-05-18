@@ -1,5 +1,7 @@
 package plp.orientadaObjetos1.declaracao.procedimento;
 
+import java.util.List;
+
 import plp.expressions2.memory.VariavelJaDeclaradaException;
 import plp.expressions2.memory.VariavelNaoDeclaradaException;
 import plp.orientadaObjetos1.comando.Procedimento;
@@ -33,4 +35,6 @@ public interface DecProcedimento {
     public boolean checaTipo(AmbienteCompilacaoOO1 ambiente) throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
         ProcedimentoJaDeclaradoException, ProcedimentoNaoDeclaradoException,
         ClasseNaoDeclaradaException,ClasseJaDeclaradaException;
+    
+    public List<String> getListProcedimentoNomes() throws ProcedimentoNaoDeclaradoException;
 }

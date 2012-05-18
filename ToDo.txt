@@ -1,6 +1,7 @@
 -checatipo: checar ambiguidade ao mixar categorias
-   -se uma classe mixa duas categorias com metodos iguais, erro de tipo
+   -se uma classe mixa duas categorias com metodos iguais, erro de tipo   OK
    -se uma classe mixa duas categorias com metodos iguais e sobreescreve (override) o metodo, compilacao OK.
+   - verificar se uma classe mixa várias categorias iguais 
    
 -Verificar chamada de metodos. Dado:
      

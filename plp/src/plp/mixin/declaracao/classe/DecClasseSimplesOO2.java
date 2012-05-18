@@ -1,5 +1,9 @@
 package plp.mixin.declaracao.classe;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 import plp.expressions2.memory.VariavelJaDeclaradaException;
 import plp.expressions2.memory.VariavelNaoDeclaradaException;
 import plp.imperative1.util.Lista;
@@ -14,6 +18,7 @@ import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos1.util.TipoClasse;
 import plp.mixin.declaracao.ConstrutorNaoDeclaradoException;
 import plp.mixin.declaracao.DecConstrutor;
+import plp.mixin.excecao.declaracao.CategoriaNaoDeclaradaException;
 import plp.mixin.memoria.AmbienteCompilacaoMixin;
 import plp.mixin.memoria.AmbienteExecucaoMixin;
 import plp.mixin.memoria.DefClasseOO2;
@@ -120,12 +125,43 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 		}
 
 		//Verifica se construtor estï¿½ declarado corretamente
-		resposta = resposta && construtor.checaTipo(ambiente);
+		resposta = resposta && construtor.checaTipo(ambiente) && verificaMetodosRepetidos(ambiente) ;
 
 		ambiente.restaura();
 
 		return resposta;
 	}
+	
+	private boolean verificaMetodosRepetidos(AmbienteCompilacaoMixin ambiente) throws ProcedimentoNaoDeclaradoException, ArrayIndexOutOfBoundsException, ClasseNaoDeclaradaException{
+		List<String> listaNomes = new ArrayList<>();	
+		
+		if(categorias==null){
+			return true; // verificacao esta ok. Porque a classe não mixa nenhuma categoria.
+		}
+		//pega todos os metodos de todas as categorias
+		for(int i=0; i< categorias.length(); i++){
+			 listaNomes.addAll(ambiente.getDefCategoria(categorias.get(i)).getListProcedimentoNomes());	
+		}   
+		
+	   	List<String> listaMetodosClasse = ambiente.getDefClasse(this.nomeClasse).getListProcedimentoNomes();
+		
+		
+		
+		//ver se tem duplicatas de metodos
+    	for(int i=0; i< listaNomes.size(); i++){
+    		for(int j=i+1; j< listaNomes.size(); j++){
+    			String procNome = listaNomes.get(i);
+    			String proc = listaNomes.get(j);
+    			if(procNome.equals(proc)){
+    				if(listaMetodosClasse.contains(procNome)){
+    					return true;
+    				}
+	    			return false;
+	    		}		
+			}
+    	}
+    	return true;
+    }
 
 	private void checaTipoVariaveisClasseMae(AmbienteCompilacaoMixin ambiente, Id nomeSuperClasse) throws ClasseNaoDeclaradaException, VariavelJaDeclaradaException, VariavelNaoDeclaradaException, ClasseJaDeclaradaException {
 		if (nomeSuperClasse != null) {

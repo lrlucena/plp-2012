@@ -1,5 +1,8 @@
 package plp.orientadaObjetos1.declaracao.procedimento;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import plp.expressions2.memory.VariavelJaDeclaradaException;
 import plp.expressions2.memory.VariavelNaoDeclaradaException;
 import plp.orientadaObjetos1.comando.Procedimento;
@@ -62,4 +65,11 @@ public class DecProcedimentoComposta implements DecProcedimento{
         ClasseNaoDeclaradaException,ClasseJaDeclaradaException{
         return declaracao1.checaTipo(ambiente) && declaracao2.checaTipo(ambiente);
     }
+	@Override
+	public List<String> getListProcedimentoNomes() throws ProcedimentoNaoDeclaradoException{			
+		List<String> listaProcedimentos = new ArrayList<>();		
+		listaProcedimentos.addAll(this.declaracao1.getListProcedimentoNomes());
+		listaProcedimentos.addAll(this.declaracao2.getListProcedimentoNomes());			
+		return listaProcedimentos;
+	}
 }

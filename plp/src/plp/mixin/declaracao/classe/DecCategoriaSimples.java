@@ -1,5 +1,8 @@
 package plp.mixin.declaracao.classe;
 
+import java.util.List;
+
+import plp.orientadaObjetos1.comando.Procedimento;
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimento;
 import plp.orientadaObjetos1.excecao.declaracao.ClasseJaDeclaradaException;
 import plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
@@ -44,10 +47,11 @@ public class DecCategoriaSimples implements  Declaracao {
         AmbienteCompilacaoMixin ambiente = (AmbienteCompilacaoMixin)amb;
         ambiente.mapDefCategoria(nome, new DefCategoria(nome, metodos));
         ambiente.incrementa();
-        resposta =  metodos.checaTipo(ambiente);
+        resposta =  metodos.checaTipo(ambiente);        
         ambiente.restaura();
         return resposta;
     }
+    
 
 
     /**

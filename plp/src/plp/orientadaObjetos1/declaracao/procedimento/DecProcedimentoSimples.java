@@ -1,5 +1,8 @@
 package plp.orientadaObjetos1.declaracao.procedimento;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import plp.expressions2.memory.VariavelJaDeclaradaException;
 import plp.expressions2.memory.VariavelNaoDeclaradaException;
 import plp.orientadaObjetos1.comando.Comando;
@@ -77,4 +80,10 @@ public class DecProcedimentoSimples implements  DecProcedimento {
         }
         return resposta;
     }
+	@Override
+	public List<String> getListProcedimentoNomes() throws ProcedimentoNaoDeclaradoException {
+		List<String> listaProcedimentos = new ArrayList<>();		
+		listaProcedimentos.add(this.nome.getIdName());		
+		return listaProcedimentos;
+	}
 }
