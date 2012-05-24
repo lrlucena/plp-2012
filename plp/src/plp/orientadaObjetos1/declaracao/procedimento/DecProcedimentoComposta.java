@@ -65,9 +65,9 @@ public class DecProcedimentoComposta implements DecProcedimento{
         ClasseNaoDeclaradaException,ClasseJaDeclaradaException{
         return declaracao1.checaTipo(ambiente) && declaracao2.checaTipo(ambiente);
     }
-	@Override
+	
 	public List<String> getListProcedimentoNomes() throws ProcedimentoNaoDeclaradoException{			
-		List<String> listaProcedimentos = new ArrayList<>();		
+		List<String> listaProcedimentos = new ArrayList<String>();
 		listaProcedimentos.addAll(this.declaracao1.getListProcedimentoNomes());
 		listaProcedimentos.addAll(this.declaracao2.getListProcedimentoNomes());			
 		return listaProcedimentos;

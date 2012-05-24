@@ -47,7 +47,12 @@ public class Lista<T> {
 			
 		return getI(0, i, this);
 	}
-
+	
+	public void add(T item, Lista<T> lista) {
+		this.head = item;
+		this.tail = lista;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuffer resposta = new StringBuffer();

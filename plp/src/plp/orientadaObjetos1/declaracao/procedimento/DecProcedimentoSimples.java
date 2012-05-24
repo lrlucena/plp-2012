@@ -80,9 +80,9 @@ public class DecProcedimentoSimples implements  DecProcedimento {
         }
         return resposta;
     }
-	@Override
+    
 	public List<String> getListProcedimentoNomes() throws ProcedimentoNaoDeclaradoException {
-		List<String> listaProcedimentos = new ArrayList<>();		
+		List<String> listaProcedimentos = new ArrayList<String>();		
 		listaProcedimentos.add(this.nome.getIdName());		
 		return listaProcedimentos;
 	}
