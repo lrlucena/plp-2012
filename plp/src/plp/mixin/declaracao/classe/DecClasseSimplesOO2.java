@@ -20,7 +20,7 @@ import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos1.util.TipoClasse;
 import plp.mixin.declaracao.ConstrutorNaoDeclaradoException;
 import plp.mixin.declaracao.DecConstrutor;
-import plp.mixin.excecao.declaracao.CategoriaNaoDeclaradaException;
+import plp.mixin.excecao.declaracao.CategoriaJaMixadaException;
 import plp.mixin.memoria.AmbienteCompilacaoMixin;
 import plp.mixin.memoria.AmbienteExecucaoMixin;
 import plp.mixin.memoria.DefClasseOO2;
@@ -113,27 +113,16 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 		if (categorias != null) {
 
 			// verifica se existem categorias iguais
-			Set<Id> setCategorias = new HashSet<Id>();
+			Set<String> setCategorias = new HashSet<String>();
 
-			for (int i = 0; i < categorias.length(); i++) { //passa as categorias para um set
-				setCategorias.add(categorias.get(i));
-			}
-
-			if(categorias.length() == setCategorias.size()){ //se true, entao nao ha repeticao
-				ambiente.mapClasseCategoria(nomeClasse, categorias);
-			} else { //ha repeticao
-				
-				ListaID cats = new ListaID();
-				
-				Iterator<Id> it = setCategorias.iterator();
-				while (it.hasNext()) {
-					Id id = (Id) it.next();
-					
-					cats.add(id, cats);
+			// passa as categorias para um set
+			for (int i = 0; i < categorias.length(); i++) { 
+				if (setCategorias.add(categorias.get(i).getId().toString()) == false) {
+					throw new CategoriaJaMixadaException(categorias.get(i).getId());
 				}
-				
-				ambiente.mapClasseCategoria(nomeClasse, cats);
 			}
+
+			ambiente.mapClasseCategoria(nomeClasse, categorias);
 		}
 
 		// Adiciona a classe no mapeameento de classes
