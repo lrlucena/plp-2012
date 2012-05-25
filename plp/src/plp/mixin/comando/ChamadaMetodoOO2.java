@@ -1,5 +1,7 @@
 package plp.mixin.comando;
 
+import java.util.List;
+
 import plp.expressions2.memory.Ambiente;
 import plp.expressions2.memory.VariavelJaDeclaradaException;
 import plp.expressions2.memory.VariavelNaoDeclaradaException;
@@ -24,7 +26,9 @@ import plp.orientadaObjetos1.memoria.DefClasse;
 import plp.orientadaObjetos1.memoria.Objeto;
 import plp.orientadaObjetos1.memoria.colecao.ListaValor;
 import plp.orientadaObjetos1.util.Tipo;
+import plp.mixin.memoria.AmbienteCompilacaoMixin;
 import plp.mixin.memoria.AmbienteExecucaoMixin;
+import plp.mixin.memoria.DefCategoria;
 import plp.mixin.memoria.DefClasseOO2;
 
 public class ChamadaMetodoOO2 extends ChamadaMetodo {
@@ -39,15 +43,37 @@ public class ChamadaMetodoOO2 extends ChamadaMetodo {
 		try {
 			metodo = defClasse.getMetodo(nomeMetodo);
 		} catch (ProcedimentoNaoDeclaradoException e) {
-			if (defClasse.getNomeSuperClasse() != null) {
-				if (ambiente instanceof AmbienteCompilacaoOO1) {
-					AmbienteCompilacaoOO1 ambienteCompilacao = (AmbienteCompilacaoOO1) ambiente;
-					DefClasseOO2 defClasseMae = (DefClasseOO2) ambienteCompilacao.getDefClasse(defClasse.getNomeSuperClasse());
-					metodo = this.getProcedimentoHierarquia(ambiente, defClasseMae, nomeMetodo);
-				} else if (ambiente instanceof AmbienteExecucaoOO1) {
-					AmbienteExecucaoOO1 ambienteExecucao = (AmbienteExecucaoOO1) ambiente;
-					DefClasseOO2 defClasseMae = (DefClasseOO2) ambienteExecucao.getDefClasse(defClasse.getNomeSuperClasse());
-					metodo = this.getProcedimentoHierarquia(ambiente, defClasseMae, nomeMetodo);
+			
+			List<DefCategoria> defCategorias;
+			
+			if(defClasse.getCategorias() != null){
+				defCategorias = defClasse.getCategorias();
+				for (int i = 0; i < defCategorias.size(); i++) {
+					try {
+						metodo = defCategorias.get(i).getMetodo(nomeMetodo);
+					} catch (ProcedimentoNaoDeclaradoException e2) {
+						// TODO: handle exception
+					}
+				}
+				
+			}
+			
+			if(metodo == null) {
+			
+				if (defClasse.getNomeSuperClasse() != null) {
+					if (ambiente instanceof AmbienteCompilacaoOO1) {
+						AmbienteCompilacaoOO1 ambienteCompilacao = (AmbienteCompilacaoOO1) ambiente;
+						DefClasseOO2 defClasseMae = (DefClasseOO2) ambienteCompilacao
+								.getDefClasse(defClasse.getNomeSuperClasse());
+						metodo = this.getProcedimentoHierarquia(ambiente,
+								defClasseMae, nomeMetodo);
+					} else if (ambiente instanceof AmbienteExecucaoOO1) {
+						AmbienteExecucaoOO1 ambienteExecucao = (AmbienteExecucaoOO1) ambiente;
+						DefClasseOO2 defClasseMae = (DefClasseOO2) ambienteExecucao
+								.getDefClasse(defClasse.getNomeSuperClasse());
+						metodo = this.getProcedimentoHierarquia(ambiente,
+								defClasseMae, nomeMetodo);
+					}
 				}
 			}
 		}

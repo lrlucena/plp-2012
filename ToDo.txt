@@ -1,9 +1,9 @@
 -checatipo: checar ambiguidade ao mixar categorias
    -se uma classe mixa duas categorias com metodos iguais, erro de tipo   OK
    -se uma classe mixa duas categorias com metodos iguais e sobreescreve (override) o metodo, compilacao OK.
-   - verificar se uma classe mixa várias categorias iguais 
+   - verificar se uma classe mixa várias categorias iguais OK
    
--Verificar chamada de metodos. Dado:
+-Verificar chamada de metodos. Dado: OK
      
      X x; x.z() 
      
@@ -13,5 +13,8 @@
       3)Para cada superclasse de X, verificar se z existe nela ou nos mixins dela
      
 -Execucao:
-  -Ao chamar um metodo x.z(), buscar o metodo na classe/superclasse/categoria adequada.
-  
+  -Ao chamar um metodo x.z(), buscar o metodo na classe/superclasse/categoria adequada. OK
+ 
+ 
+- Parser
+	- Resolver problema do parser mixin.jj "TesteMixin2.txt" OK

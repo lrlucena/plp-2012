@@ -1,5 +1,7 @@
 package plp.mixin.memoria;
 
+import java.util.List;
+
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimento;
 import plp.orientadaObjetos1.declaracao.variavel.DecVariavel;
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
@@ -14,14 +16,14 @@ public class DefClasseOO2 extends DefClasse {
 	 */
 	private Id nomeSuperClasse;
 	
-	private ListaID categorias;
+	private List<DefCategoria> categorias;
 
 	/**
 	 * Consturtor
 	 */
 	private DecConstrutor construtor;
 
-	public DefClasseOO2(Id idClasse, Id nomeSuperClasse,ListaID categorias,DecVariavel decVariavel,
+	public DefClasseOO2(Id idClasse, Id nomeSuperClasse,List<DefCategoria> categorias,DecVariavel decVariavel,
 			DecConstrutor construtor, DecProcedimento decProcedimento) {
 		super(idClasse, decVariavel, decProcedimento);
 		this.nomeSuperClasse = nomeSuperClasse;
@@ -51,11 +53,11 @@ public class DefClasseOO2 extends DefClasse {
 		this.nomeSuperClasse = nomeSuperClasse;
 	}
 
-	public void setCategorias(ListaID categorias) {
+	public void setCategorias(List<DefCategoria> categorias) {
 		this.categorias = categorias;
 	}
 
-	public ListaID getCategorias() {
+	public List<DefCategoria> getCategorias() {
 		return categorias;
 	}
 }

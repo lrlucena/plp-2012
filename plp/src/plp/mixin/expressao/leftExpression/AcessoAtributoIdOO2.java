@@ -7,7 +7,10 @@ import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos1.expressao.leftExpression.LeftExpression;
 import plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
 import plp.orientadaObjetos1.util.Tipo;
+import plp.mixin.memoria.AmbienteCompilacaoMixin;
+import plp.mixin.memoria.DefCategoria;
 import plp.mixin.memoria.DefClasseOO2;
+import plp.mixin.util.ListaID;
 
 public class AcessoAtributoIdOO2 extends AcessoAtributoId{
 
@@ -30,6 +33,29 @@ public class AcessoAtributoIdOO2 extends AcessoAtributoId{
 
 		return retorno;
 	}
+	
+//	private boolean checaTipoCategorias(AmbienteCompilacaoMixin ambiente, ListaID idCategorias) throws ClasseNaoDeclaradaException {
+//		boolean retorno = false;
+//		
+//		for (int i = 0; i < idCategorias.length(); i++) {
+//			DefCategoria defCategoria = ambiente.getDefCategoria(idCategorias.get(i));
+//			
+//			defCategoria.
+//			
+//		} 
+//		
+//
+//		try {
+//			defSuperClasse.getTipoAtributo(super.getId());
+//			retorno = true;
+//		} catch (VariavelNaoDeclaradaException atrib) {
+//			if (defSuperClasse.getNomeSuperClasse() != null) {
+//				retorno = this.checaTipoClasseMae(ambiente, defSuperClasse.getNomeSuperClasse());
+//			}
+//   	 	}
+//
+//		return retorno;
+//	}
 
 	@Override
 	public boolean checaTipo(AmbienteCompilacaoOO1 ambiente) throws VariavelNaoDeclaradaException, ClasseNaoDeclaradaException {

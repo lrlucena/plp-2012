@@ -75,15 +75,20 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 			throws ClasseJaDeclaradaException, ClasseNaoDeclaradaException,
 			ConstrutorNaoDeclaradoException {
 
+		if (categorias != null) {
+			ambiente.mapClasseCategoria(nomeClasse, categorias);
+		}
+		
 		// Adiciona a classe no mapeameento de classes
 		ambiente.mapDefClasse(nomeClasse, new DefClasseOO2(nomeClasse,
-				nomeSuperClasse, categorias, this.atributos, construtor,
+				nomeSuperClasse, ambiente.getClasseCategoria(nomeClasse), this.atributos, construtor,
 				metodos));
 
 		// Verifica se a super classe j� foi declarada
 		if (nomeSuperClasse != null) {
 			ambiente.mapSuperClasse(nomeClasse, nomeSuperClasse);
 		}
+
 
 		return ambiente;
 	}
@@ -98,6 +103,8 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 	 * @return <code>true</code> se os tipos da declaracao sao validos;
 	 *         <code>false</code> caso contrario.
 	 * @throws ConstrutorNaoDeclaradoException
+	 * @throws CategoriaJaMixadaException 
+	 * @throws ArrayIndexOutOfBoundsException 
 	 */
 	public boolean checaTipo(AmbienteCompilacaoMixin ambiente)
 			throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
@@ -117,7 +124,7 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 
 			// passa as categorias para um set
 			for (int i = 0; i < categorias.length(); i++) { 
-				if (setCategorias.add(categorias.get(i).getId().toString()) == false) {
+				if (setCategorias.add(categorias.get(i).getId().toString()) == false) { //duplicatas
 					throw new CategoriaJaMixadaException(categorias.get(i).getId());
 				}
 			}
@@ -127,7 +134,7 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 
 		// Adiciona a classe no mapeameento de classes
 		ambiente.mapDefClasse(nomeClasse, new DefClasseOO2(nomeClasse,
-				nomeSuperClasse, categorias, this.atributos, construtor,
+				nomeSuperClasse, ambiente.getClasseCategoria(nomeClasse), this.atributos, construtor,
 				metodos));
 
 		boolean resposta = false;
@@ -138,9 +145,7 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 			ambiente.map(new Id("this"), new TipoClasse(nomeClasse));
 
 			if (nomeSuperClasse != null) {
-				this
-						.checaTipoVariaveisClasseMae(ambiente,
-								this.nomeSuperClasse);
+				this.checaTipoVariaveisClasseMae(ambiente,this.nomeSuperClasse);
 			}
 			resposta = metodos.checaTipo(ambiente);
 		}

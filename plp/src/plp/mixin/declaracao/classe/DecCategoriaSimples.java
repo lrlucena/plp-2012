@@ -9,6 +9,7 @@ import plp.orientadaObjetos1.excecao.declaracao.ClasseNaoDeclaradaException;
 import plp.mixin.excecao.declaracao.CategoriaJaDeclaradaException;
 import plp.mixin.excecao.declaracao.CategoriaNaoDeclaradaException;
 import plp.mixin.memoria.AmbienteCompilacaoMixin;
+import plp.mixin.memoria.AmbienteExecucaoMixin;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoJaDeclaradoException;
 import plp.orientadaObjetos1.excecao.declaracao.ProcedimentoNaoDeclaradoException;
 import plp.orientadaObjetos1.expressao.leftExpression.Id;
@@ -60,11 +61,12 @@ public class DecCategoriaSimples implements  Declaracao {
      *  e valores.
      * @return o ambiente modificado pela declarao da classe.
      */
-    public AmbienteExecucaoOO1 elabora(AmbienteExecucaoOO1 ambiente)
+    public AmbienteExecucaoOO1 elabora(AmbienteExecucaoOO1 amb)
        throws CategoriaJaDeclaradaException,CategoriaNaoDeclaradaException,
               ProcedimentoNaoDeclaradoException,ProcedimentoJaDeclaradoException {
-		// ambiente.mapDefCategoria(nome, new DefCategoria(nome, metodos));
-		// return ambiente;
+    	AmbienteExecucaoMixin ambiente = (AmbienteExecucaoMixin)amb;
+
+		ambiente.mapDefCategoria(nome, new DefCategoria(nome, metodos));
         return ambiente;
 	}    
     

@@ -89,7 +89,7 @@ public class ListaDeclaracaoOO extends Lista<Declaracao> {
 			throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
 			ClasseJaDeclaradaException, ClasseNaoDeclaradaException,
 			ProcedimentoNaoDeclaradoException,
-			ProcedimentoJaDeclaradoException, ConstrutorNaoDeclaradoException {
+			ProcedimentoJaDeclaradoException, ConstrutorNaoDeclaradoException{
 
 		boolean ret = false;
 		if (length() == 1) {
