@@ -2,13 +2,11 @@ package plp.mixin.declaracao.classe;
 
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
 import plp.expressions2.memory.VariavelJaDeclaradaException;
 import plp.expressions2.memory.VariavelNaoDeclaradaException;
-import plp.imperative1.util.Lista;
 import plp.orientadaObjetos1.declaracao.classe.DecClasseSimples;
 import plp.orientadaObjetos1.declaracao.procedimento.DecProcedimento;
 import plp.orientadaObjetos1.declaracao.variavel.DecVariavel;
@@ -153,19 +151,22 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 				this.checaTipoVariaveisClasseMae(ambiente,this.nomeSuperClasse);
 			}
 			
-			for (DefCategoria categoria : ambiente.getClasseCategoria(nomeClasse)) {
-				List<String> list = categoria.getListAssinaturaNomes();
-				
-				for (int i = 0; i < list.size(); i++) {
-					
-					Id id = new Id(list.get(i));
-					
-					try {
-						defClasse.getProcedimentoHierarquia(ambiente, id, false);
-					} catch (ProcedimentoNaoDeclaradoException e) {
-						resposta = false;
+			if (categorias != null) {
+
+				for (DefCategoria categoria : ambiente.getClasseCategoria(nomeClasse)) {
+					List<String> list = categoria.getListAssinaturaNomes();
+
+					for (int i = 0; i < list.size(); i++) {
+
+						Id id = new Id(list.get(i));
+
+						try {
+							defClasse.getProcedimentoHierarquia(ambiente, id,false);
+						} catch (ProcedimentoNaoDeclaradoException e) {
+							resposta = false;
+						}
+
 					}
-						
 				}
 			}
 			
