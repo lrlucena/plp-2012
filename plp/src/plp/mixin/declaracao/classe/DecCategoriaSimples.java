@@ -26,9 +26,12 @@ public class DecCategoriaSimples implements  Declaracao {
     
     protected DecProcedimento metodos;
     
+    protected DecProcedimento assinaturas;
     
-    public  DecCategoriaSimples(Id nome, DecProcedimento metodos){
+    
+    public  DecCategoriaSimples(Id nome, DecProcedimento assinaturas ,DecProcedimento metodos){
         this.nome = nome;
+        this.assinaturas = assinaturas;
         this.metodos = metodos;
     }
 
@@ -48,7 +51,7 @@ public class DecCategoriaSimples implements  Declaracao {
         AmbienteCompilacaoMixin ambiente = (AmbienteCompilacaoMixin)amb;
         ambiente.mapDefCategoria(nome, new DefCategoria(nome, metodos));
         ambiente.incrementa();
-        resposta =  metodos.checaTipo(ambiente);        
+        resposta =  metodos.checaTipo(ambiente) && assinaturas.checaTipo(ambiente);
         ambiente.restaura();
         return resposta;
     }

@@ -67,12 +67,14 @@ public class DecProcedimentoSimples implements  DecProcedimento {
        throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
               ProcedimentoJaDeclaradoException, ProcedimentoNaoDeclaradoException,
               ClasseNaoDeclaradaException,ClasseJaDeclaradaException {
-       boolean resposta;
+       boolean resposta = false;
         if(parametrosFormais.checaTipo(ambiente)) {
             ambiente.mapParametrosProcedimento(nome, parametrosFormais);
             ambiente.incrementa();
             ambiente = parametrosFormais.declaraParametro(ambiente);
-            resposta = comando.checaTipo(ambiente);
+            if(comando!=null){
+            	 resposta = comando.checaTipo(ambiente);
+            } // se o metodo não tiver corpo(comando), significa que é uma assinatura.           
             ambiente.restaura();
         }
         else {

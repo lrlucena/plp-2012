@@ -52,6 +52,13 @@ public class ListaDeclaracaoOO extends Lista<Declaracao> {
 		super(decOO, lista);
 	}
 
+	public ListaDeclaracaoOO(Declaracao dec, ListaDeclaracaoOO lista) {
+		super(dec, lista);
+	}
+	public ListaDeclaracaoOO(Declaracao dec) {
+		super(dec, new ListaDeclaracaoOO());
+	}
+
 	public AmbienteExecucaoMixin elabora(AmbienteExecucaoMixin ambiente)
 			throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
 			ClasseJaDeclaradaException, ClasseNaoDeclaradaException,

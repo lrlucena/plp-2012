@@ -215,6 +215,7 @@ TOKEN : /* TOKENS DE OO1 */
 TOKEN : /* TOKENS DE OO2 */
 {
   < EXTENDS : "extends" >
+| < ABSTRACT : "abstract" >
 }
 
 TOKEN : /* TOKENS DE OO2-mixin */
@@ -1082,42 +1083,50 @@ AcessoAtributoIdOO2 PAcessoAtributoIdChamador() :
 }
 
 /**
-*  ListaDeclaracaoOO := DecClasse
-*                    |  DecCategoria
-*                    | DecClasse "," ListaDeclaracaoOO
-*                    | DecCategoria "," ListaDeclaracaoOO
+*  ListaDeclaracaoOO := 
+*                    | catOrCass "," ListaDeclaracaoOO
+*                    | catOrCass
 **/
+
+Declaracao PClassOrCategory():
+{
+  Declaracao retorno;}
+{
+  (
+	retorno = PDecClasseAtomica()
+  | retorno = PDecCategoriaAtomica()
+  )
+  {    return retorno;
+  }
+}
+
 
 ListaDeclaracaoOO PListaDeclaracaoOO() :
 {
+	Declaracao d1;
+	ListaDeclaracaoOO d2 = null;
 	ListaDeclaracaoOO retorno;
-	DecClasse decClasse;
-	DecCategoriaSimples decCategoria;
 }
 {
-  (
-    LOOKAHEAD(PDecClasseAtomica() < COMMA >)
-    	retorno = PDecClasseComposta()
-    |
-    LOOKAHEAD(PDecCategoriaAtomica() < COMMA >)
-    	retorno = PDecCategoriaComposta()
-    |
-    LOOKAHEAD(PDecClasseAtomica())
-    ( decClasse = PDecClasseAtomica()
-      {
-      	retorno = new ListaDeclaracaoOO(decClasse);
+	d1 = PClassOrCategory()
+	d2 = PListaDeclaracaoRest()
+	{	  if (d2 == null)	  {	    return new ListaDeclaracaoOO(d1);
+	  }
+	  else	  {		return new ListaDeclaracaoOO(d1, d2);
       }
-    )
-    |
-    decCategoria = PDecCategoriaAtomica()
-    {
-    	retorno = new ListaDeclaracaoOO(decCategoria);
-    }
-  )
-  {
-    return retorno;
-  }
+    }	    
 }
+
+ListaDeclaracaoOO PListaDeclaracaoRest():
+{
+  ListaDeclaracaoOO retorno = null;}
+{  (    < COMMA > retorno = PListaDeclaracaoOO()
+   | {}
+ )
+ {   return retorno;
+ }
+}
+
 
 
 /**
@@ -1128,17 +1137,24 @@ DecCategoriaSimples PDecCategoriaAtomica() :
 {
   Id nome;
   DecProcedimento metodos;
+  DecProcedimento assinaturas = null;
 }
 {
-	     <CATEGORIA> nome = PId()
-	     <LBRACE>
-		metodos = PDecProcedimento()
-             <RBRACE>
-			{
-				return new DecCategoriaSimples(nome, metodos);
-			}
+   < CATEGORIA > nome = PId()    < LBRACE >
+    assinaturas = PListaAssinaturas()
+    metodos = PDecProcedimento()     < RBRACE >      {        return new DecCategoriaSimples(nome, assinaturas, metodos);      }
 }
 
+DecProcedimento PListaAssinaturas():
+{  DecProcedimento assinaturas = null;
+}
+{
+  (
+    assinaturas = PDecAssinatura()  < SEMICOLON >
+  )
+  {    return assinaturas;
+  }
+}
 
 /**
  * ...  | DecCategoria "," ListaDeclaracaoOO
@@ -1165,69 +1181,63 @@ DecClasse PDecClasseAtomica() :
   Id nomeClasse;
   Id superClasse = null;
   ListaID categoria = null;
-  DecVariavel atributos;
+  DecVariavel atributos = null;
   DecConstrutor decConstrutor = null;
-  DecProcedimento metodos;
-  DecClasse resposta;
+  DecProcedimento metodos = null;
 }
 {
-	(
-		LOOKAHEAD(<CLASSE> PId() <EXTENDS> PId())
-		(
-			<CLASSE> nomeClasse = PId() <EXTENDS> superClasse = PId()
-			<LBRACE>
-				atributos = PDecVariavel() <SEMICOLON>
-				decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
-				metodos = PDecProcedimento()
-			<RBRACE>
-			{
-				resposta = new DecClasseSimplesOO2(nomeClasse, superClasse, atributos, decConstrutor, metodos);
-			}
-		)
-		|
-		LOOKAHEAD(<CLASSE> PId() <MIXIN> PListaID())
-		(
-			<CLASSE> nomeClasse = PId() <MIXIN> categoria = PListaID()
-			<LBRACE>
-				atributos = PDecVariavel() <SEMICOLON>
-				decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
-				metodos = PDecProcedimento()
-			<RBRACE>
-			{
-				resposta = new DecClasseSimplesOO2(nomeClasse, superClasse, categoria, atributos, decConstrutor, metodos);
-			}
-		)
-		|
-		LOOKAHEAD(<CLASSE> PId() <EXTENDS> PId() <MIXIN> PListaID())
-		(
-			<CLASSE> nomeClasse = PId() <EXTENDS> superClasse = PId() <MIXIN> categoria = PListaID()
-			<LBRACE>
-				atributos = PDecVariavel() <SEMICOLON>
-				decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
-				metodos = PDecProcedimento()
-			<RBRACE>
-			{
-				resposta = new DecClasseSimplesOO2(nomeClasse, superClasse, categoria, atributos, decConstrutor, metodos);
-			}
-		)
-		|
-		LOOKAHEAD(<CLASSE> PId())
-		(
-			<CLASSE> nomeClasse = PId()
-			<LBRACE>
-				atributos = PDecVariavel() <SEMICOLON>
-				decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
-				metodos = PDecProcedimento()
-			<RBRACE>
-			{
-				resposta = new DecClasseSimplesOO2(nomeClasse, superClasse, atributos, decConstrutor, metodos);
-			}
-		)
+(
+	LOOKAHEAD(<CLASSE> PId() <EXTENDS> PId() < MIXIN > PListaID())
+  	(
+	  <CLASSE> nomeClasse = PId()
+	  <EXTENDS> superClasse = PId()
+	  <MIXIN> categoria = PListaID()
+
+	  <LBRACE>
+		atributos = PDecVariavel() <SEMICOLON>
+		decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
+		metodos = PDecProcedimento()
+	  <RBRACE>
 	)
+| 	LOOKAHEAD(<CLASSE> PId() <EXTENDS> PId())
+	(	  <CLASSE> nomeClasse = PId()
+	  <EXTENDS> superClasse = PId()
+
+	  <LBRACE>
+		atributos = PDecVariavel() <SEMICOLON>
+		decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
+		metodos = PDecProcedimento()
+	  <RBRACE>
+	)
+| 	LOOKAHEAD(<CLASSE> PId() <MIXIN> PListaID())
+	(
+	  <CLASSE> nomeClasse = PId()
+	  <MIXIN> categoria = PListaID()
+
+	  <LBRACE>
+		atributos = PDecVariavel() <SEMICOLON>
+		decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
+		metodos = PDecProcedimento()
+	  <RBRACE>
+	)
+|	(
+  	  <CLASSE> nomeClasse = PId()
+
+  	  <LBRACE>
+		atributos = PDecVariavel() <SEMICOLON>
+		decConstrutor = PDecConstrutor(nomeClasse) <COMMA>
+		metodos = PDecProcedimento()
+	  <RBRACE>
+	)
+
+	
+)
 	{
-		return resposta;
+		return new DecClasseSimplesOO2(nomeClasse, superClasse, categoria, atributos, decConstrutor, metodos);
+		
 	}
 }
+
 
 /**
  * ...  | DecClasse "," ListaDeclaracaoOO
@@ -1394,6 +1404,38 @@ DecProcedimento PDecProcedimento() :
   )
   {
     return retorno;
+  }
+}
+
+DecProcedimento PDecAssinatura():
+{
+  DecProcedimento retorno;}
+{
+  (    LOOKAHEAD(PDecAssinaturaSimples() < COMMA >)    {      return PDecAssinaturaComposta();    }  |    {      return PDecAssinaturaSimples();    }  )}
+
+DecProcedimento PDecAssinaturaSimples():
+{  Id nome;
+  ListaDeclaracaoParametro listaPar = null;}
+{
+
+  (    < ABSTRACT > nome = PId() < LPAREN >
+    (      LOOKAHEAD( < RPAREN > )
+      < RPAREN >
+    |       listaPar = PListaDeclaracaoParametro()
+      < RPAREN >
+    )  )  {    if (listaPar == null)    {      listaPar = new ListaDeclaracaoParametro();    }    return new DecProcedimentoSimples(nome, listaPar, null);  }}
+
+
+
+DecProcedimento PDecAssinaturaComposta() :
+{
+  DecProcedimento d1;
+  DecProcedimento d2;
+}
+{
+  d1 = PDecAssinaturaSimples() < COMMA > d2 = PDecAssinatura()
+  {
+    return new DecProcedimentoComposta(d1, d2);
   }
 }
 
