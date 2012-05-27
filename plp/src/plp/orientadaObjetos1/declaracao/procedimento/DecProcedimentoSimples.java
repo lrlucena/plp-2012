@@ -67,8 +67,9 @@ public class DecProcedimentoSimples implements  DecProcedimento {
        throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
               ProcedimentoJaDeclaradoException, ProcedimentoNaoDeclaradoException,
               ClasseNaoDeclaradaException,ClasseJaDeclaradaException {
-       boolean resposta = false;
-        if(parametrosFormais.checaTipo(ambiente)) {
+       boolean resposta = true;
+       
+       if(parametrosFormais.checaTipo(ambiente)) {
             ambiente.mapParametrosProcedimento(nome, parametrosFormais);
             ambiente.incrementa();
             ambiente = parametrosFormais.declaraParametro(ambiente);
@@ -83,9 +84,15 @@ public class DecProcedimentoSimples implements  DecProcedimento {
         return resposta;
     }
     
-	public List<String> getListProcedimentoNomes() throws ProcedimentoNaoDeclaradoException {
+	public List<String> getListProcedimentoNomes() {
 		List<String> listaProcedimentos = new ArrayList<String>();		
 		listaProcedimentos.add(this.nome.getIdName());		
 		return listaProcedimentos;
+	}
+	
+	public List<String> getListAssinaturaNomes() {
+		List<String> listAssinaturas = new ArrayList<String>();		
+		listAssinaturas.add(this.nome.getIdName());		
+		return listAssinaturas;
 	}
 }

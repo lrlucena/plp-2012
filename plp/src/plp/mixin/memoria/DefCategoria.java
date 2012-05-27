@@ -10,7 +10,7 @@ import plp.orientadaObjetos1.expressao.leftExpression.Id;
 import plp.orientadaObjetos1.util.Tipo;
 
 /**
- * Uma definiçao de classe é uma declaraçao de variável e uma declaração de
+ * Uma definiçao de categoria é uma declaraçao de variável e uma declaração de
  * procedimento. Ambos podem ser simples ou compostos.
  */
 public class DefCategoria {
@@ -19,14 +19,17 @@ public class DefCategoria {
 	 * Declaraçao do Procedimento
 	 */
 	protected DecProcedimento decProcedimento;
-
+	
+	protected DecProcedimento assinaturas;
+	
 	/**
 	 * Declaracao de id
 	 */
 	protected Id idCategoria;
 
-	public DefCategoria(Id idCategoria, DecProcedimento decProcedimento) {
+	public DefCategoria(Id idCategoria, DecProcedimento assinaturas,DecProcedimento decProcedimento) {
 		this.idCategoria = idCategoria;
+		this.assinaturas = assinaturas;
 		this.decProcedimento = decProcedimento;
 	}
 
@@ -41,14 +44,24 @@ public class DefCategoria {
 	 */
 	public Procedimento getMetodo(Id idMetodo)
 			throws ProcedimentoNaoDeclaradoException {
-		return decProcedimento.getProcedimento(idMetodo);
+		
+		try {
+			return decProcedimento.getProcedimento(idMetodo);
+		} catch (Exception e) {
+			return assinaturas.getProcedimento(idMetodo);
+		}
 	}
 
 	public Id getIdCategoria() {
 		return idCategoria;
 	}
 	
-	public List<String> getListProcedimentoNomes() throws ProcedimentoNaoDeclaradoException {		
+	public List<String> getListProcedimentoNomes() {		
 		return decProcedimento.getListProcedimentoNomes();
 	}
+	
+	public List<String> getListAssinaturaNomes() {		
+		return assinaturas.getListAssinaturaNomes();
+	}
+
 }

@@ -23,6 +23,7 @@ import plp.mixin.declaracao.DecConstrutor;
 import plp.mixin.excecao.declaracao.CategoriaJaMixadaException;
 import plp.mixin.memoria.AmbienteCompilacaoMixin;
 import plp.mixin.memoria.AmbienteExecucaoMixin;
+import plp.mixin.memoria.DefCategoria;
 import plp.mixin.memoria.DefClasseOO2;
 import plp.mixin.util.ListaID;
 
@@ -132,22 +133,43 @@ public class DecClasseSimplesOO2 extends DecClasseSimples {
 			ambiente.mapClasseCategoria(nomeClasse, categorias);
 		}
 
-		// Adiciona a classe no mapeameento de classes
-		ambiente.mapDefClasse(nomeClasse, new DefClasseOO2(nomeClasse,
+		DefClasseOO2 defClasse = new DefClasseOO2(nomeClasse,
 				nomeSuperClasse, ambiente.getClasseCategoria(nomeClasse), this.atributos, construtor,
-				metodos));
+				metodos);
+		
+		// Adiciona a classe no mapeameento de classes
+		ambiente.mapDefClasse(nomeClasse, defClasse);
 
 		boolean resposta = false;
 		ambiente.incrementa();
 
 		DecVariavel atr = (DecVariavel) this.atributos;
 		if (atr.checaTipo(ambiente)) {
+			resposta = true;
+			
 			ambiente.map(new Id("this"), new TipoClasse(nomeClasse));
 
 			if (nomeSuperClasse != null) {
 				this.checaTipoVariaveisClasseMae(ambiente,this.nomeSuperClasse);
 			}
-			resposta = metodos.checaTipo(ambiente);
+			
+			for (DefCategoria categoria : ambiente.getClasseCategoria(nomeClasse)) {
+				List<String> list = categoria.getListAssinaturaNomes();
+				
+				for (int i = 0; i < list.size(); i++) {
+					
+					Id id = new Id(list.get(i));
+					
+					try {
+						defClasse.getProcedimentoHierarquia(ambiente, id, false);
+					} catch (ProcedimentoNaoDeclaradoException e) {
+						resposta = false;
+					}
+						
+				}
+			}
+			
+			resposta = metodos.checaTipo(ambiente) && resposta;
 		}
 
 		// Verifica se construtor est� declarado corretamente

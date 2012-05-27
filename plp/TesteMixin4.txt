@@ -3,7 +3,6 @@
         abstract a(),
         abstract b();
 		proc print() { 
-		    this.a();
 			write("Testando Mixin")
 		}
 
@@ -16,7 +15,7 @@
 			this.valor := i
 		},
 		
-		proc a(){write("ops")}
+		proc a(){ this.print(); write("OK")}
 	};
 
 	{

@@ -36,5 +36,7 @@ public interface DecProcedimento {
         ProcedimentoJaDeclaradoException, ProcedimentoNaoDeclaradoException,
         ClasseNaoDeclaradaException,ClasseJaDeclaradaException;
     
-    public List<String> getListProcedimentoNomes() throws ProcedimentoNaoDeclaradoException;
+    public List<String> getListProcedimentoNomes();
+    
+    public List<String> getListAssinaturaNomes();
 }

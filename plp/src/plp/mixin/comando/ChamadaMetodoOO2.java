@@ -37,52 +37,6 @@ public class ChamadaMetodoOO2 extends ChamadaMetodo {
 		super(expressao, nomeMetodo, parametrosReais);
 	}
 
-	private Procedimento getProcedimentoHierarquia (Ambiente ambiente, DefClasseOO2 defClasse, Id nomeMetodo) throws ClasseNaoDeclaradaException, ProcedimentoNaoDeclaradoException {
-		Procedimento metodo = null;
-
-		try {
-			metodo = defClasse.getMetodo(nomeMetodo);
-		} catch (ProcedimentoNaoDeclaradoException e) {
-			
-			List<DefCategoria> defCategorias;
-			
-			if(defClasse.getCategorias() != null){
-				defCategorias = defClasse.getCategorias();
-				for (int i = 0; i < defCategorias.size(); i++) {
-					try {
-						metodo = defCategorias.get(i).getMetodo(nomeMetodo);
-					} catch (ProcedimentoNaoDeclaradoException e2) {
-						// TODO: handle exception
-					}
-				}
-				
-			}
-			
-			if(metodo == null) {
-			
-				if (defClasse.getNomeSuperClasse() != null) {
-					if (ambiente instanceof AmbienteCompilacaoOO1) {
-						AmbienteCompilacaoOO1 ambienteCompilacao = (AmbienteCompilacaoOO1) ambiente;
-						DefClasseOO2 defClasseMae = (DefClasseOO2) ambienteCompilacao
-								.getDefClasse(defClasse.getNomeSuperClasse());
-						metodo = this.getProcedimentoHierarquia(ambiente,
-								defClasseMae, nomeMetodo);
-					} else if (ambiente instanceof AmbienteExecucaoOO1) {
-						AmbienteExecucaoOO1 ambienteExecucao = (AmbienteExecucaoOO1) ambiente;
-						DefClasseOO2 defClasseMae = (DefClasseOO2) ambienteExecucao
-								.getDefClasse(defClasse.getNomeSuperClasse());
-						metodo = this.getProcedimentoHierarquia(ambiente,
-								defClasseMae, nomeMetodo);
-					}
-				}
-			}
-		}
-		if (metodo == null) {
-			throw new ProcedimentoNaoDeclaradoException(nomeMetodo);
-		}
-		return metodo;
-	}
-
     public AmbienteExecucaoOO1 executar(AmbienteExecucaoOO1 ambiente) throws VariavelJaDeclaradaException, VariavelNaoDeclaradaException,
     	ProcedimentoNaoDeclaradoException, ProcedimentoJaDeclaradoException, ObjetoJaDeclaradoException,
     	ObjetoNaoDeclaradoException, ClasseNaoDeclaradaException, ClasseJaDeclaradaException, EntradaInvalidaException {
@@ -90,8 +44,8 @@ public class ChamadaMetodoOO2 extends ChamadaMetodo {
 	    ValorRef vr = (ValorRef) expressao.avaliar(ambiente);  // recupera o id do objeto
 	    Objeto objeto =  ambiente.getObjeto(vr);               // recupera o objeto
 	    Id idClasse = objeto.getClasse();                      // recupera o tipo do objeto
-	    DefClasse defClasse = ambiente.getDefClasse((plp.expressions2.expression.Id)idClasse); // recupera a defini��o da classe
-	    Procedimento metodo = this.getProcedimentoHierarquia(ambiente, (DefClasseOO2) defClasse, nomeMetodo); // recupera o procedimento
+	    DefClasseOO2 defClasse = (DefClasseOO2) ambiente.getDefClasse((plp.expressions2.expression.Id)idClasse); // recupera a defini��o da classe
+	    Procedimento metodo = defClasse.getProcedimentoHierarquia(ambiente, nomeMetodo, true); // recupera o procedimento
 	    // cria um novo ambiente para a execucao, pois
 	    // n�o deve levar em conta as vari�veis definidas na main
 	    AmbienteExecucaoOO1 aux = new ContextoExecucaoOO1(ambiente);
@@ -111,10 +65,27 @@ public class ChamadaMetodoOO2 extends ChamadaMetodo {
         //� v�lido para a definicao de classe obtida a partir de expressao.
         //Se n�o for v�lido, a exce��o ProcedimentoNaoDeclaradoException ser�
         //lan�ada e checaTipo retornar� false.
-        Tipo tipoClasse = expressao.getTipo(ambiente);
-        DefClasse defClasse = ambiente.getDefClasse(tipoClasse.getTipo());
+        
+        AmbienteCompilacaoMixin amb = ((AmbienteCompilacaoMixin) ambiente);
+        
+        Tipo tipoClasse = expressao.getTipo(amb);
+        DefClasseOO2 defClasse = null;
+        DefCategoria defCategoria = null;
+        
+        try{
+        	defClasse = (DefClasseOO2) amb.getDefClasse(tipoClasse.getTipo());
+        } catch (ClasseNaoDeclaradaException e) {
+			defCategoria = amb.getDefCategoria(tipoClasse.getTipo());
+		}
         try {
-            Procedimento metodo = this.getProcedimentoHierarquia(ambiente, (DefClasseOO2) defClasse, nomeMetodo);
+        	Procedimento metodo = null;
+        	
+        	if(defClasse == null){
+        		metodo = defCategoria.getMetodo(nomeMetodo);
+        	} else {
+        		metodo = defClasse.getProcedimentoHierarquia(amb, nomeMetodo, true);
+        	}
+        	
             ambiente.incrementa();
             ambiente.map(new Id("this"),tipoClasse);
             resposta = new ChamadaProcedimento(metodo, parametrosReais).checaTipo(ambiente);

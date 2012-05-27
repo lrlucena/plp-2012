@@ -38,4 +38,9 @@ public class Procedimento {
         return comando;
     }
 
+    public boolean isAssinatura(){
+    	if(comando == null)
+    		return true;
+    	return false;
+    }
 }

@@ -17,6 +17,7 @@ import plp.mixin.memoria.DefCategoria;
 import plp.orientadaObjetos1.declaracao.Declaracao;
 import plp.orientadaObjetos1.memoria.AmbienteCompilacaoOO1;
 import plp.orientadaObjetos1.memoria.AmbienteExecucaoOO1;
+import plp.orientadaObjetos1.util.TipoClasse;
 /**
  * Classe que representa a declaracao de uma unica classe.
  */
@@ -29,7 +30,7 @@ public class DecCategoriaSimples implements  Declaracao {
     protected DecProcedimento assinaturas;
     
     
-    public  DecCategoriaSimples(Id nome, DecProcedimento assinaturas ,DecProcedimento metodos){
+    public DecCategoriaSimples(Id nome, DecProcedimento assinaturas, DecProcedimento metodos){
         this.nome = nome;
         this.assinaturas = assinaturas;
         this.metodos = metodos;
@@ -49,8 +50,9 @@ public class DecCategoriaSimples implements  Declaracao {
               ProcedimentoNaoDeclaradoException, ProcedimentoJaDeclaradoException  {
         boolean resposta;
         AmbienteCompilacaoMixin ambiente = (AmbienteCompilacaoMixin)amb;
-        ambiente.mapDefCategoria(nome, new DefCategoria(nome, metodos));
+        ambiente.mapDefCategoria(nome, new DefCategoria(nome, assinaturas, metodos));
         ambiente.incrementa();
+        ambiente.map(new Id("this"), new TipoClasse(nome));
         resposta =  metodos.checaTipo(ambiente) && assinaturas.checaTipo(ambiente);
         ambiente.restaura();
         return resposta;
@@ -69,7 +71,7 @@ public class DecCategoriaSimples implements  Declaracao {
               ProcedimentoNaoDeclaradoException,ProcedimentoJaDeclaradoException {
     	AmbienteExecucaoMixin ambiente = (AmbienteExecucaoMixin)amb;
 
-		ambiente.mapDefCategoria(nome, new DefCategoria(nome, metodos));
+		ambiente.mapDefCategoria(nome, new DefCategoria(nome,assinaturas, metodos));
         return ambiente;
 	}    
     

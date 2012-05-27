@@ -66,10 +66,17 @@ public class DecProcedimentoComposta implements DecProcedimento{
         return declaracao1.checaTipo(ambiente) && declaracao2.checaTipo(ambiente);
     }
 	
-	public List<String> getListProcedimentoNomes() throws ProcedimentoNaoDeclaradoException{			
+	public List<String> getListProcedimentoNomes() {			
 		List<String> listaProcedimentos = new ArrayList<String>();
 		listaProcedimentos.addAll(this.declaracao1.getListProcedimentoNomes());
 		listaProcedimentos.addAll(this.declaracao2.getListProcedimentoNomes());			
 		return listaProcedimentos;
+	}
+	
+	public List<String> getListAssinaturaNomes() {			
+		List<String> listAssinaturas = new ArrayList<String>();
+		listAssinaturas.addAll(this.declaracao1.getListAssinaturaNomes());
+		listAssinaturas.addAll(this.declaracao2.getListAssinaturaNomes());			
+		return listAssinaturas;
 	}
 }
