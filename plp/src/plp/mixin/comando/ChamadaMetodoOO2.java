@@ -45,7 +45,7 @@ public class ChamadaMetodoOO2 extends ChamadaMetodo {
 	    Objeto objeto =  ambiente.getObjeto(vr);               // recupera o objeto
 	    Id idClasse = objeto.getClasse();                      // recupera o tipo do objeto
 	    DefClasseOO2 defClasse = (DefClasseOO2) ambiente.getDefClasse((plp.expressions2.expression.Id)idClasse); // recupera a defini��o da classe
-	    Procedimento metodo = defClasse.getProcedimentoHierarquia(ambiente, nomeMetodo, true); // recupera o procedimento
+	    Procedimento metodo = defClasse.getProcedimentoHierarquia(ambiente, nomeMetodo, false); // recupera o procedimento
 	    // cria um novo ambiente para a execucao, pois
 	    // n�o deve levar em conta as vari�veis definidas na main
 	    AmbienteExecucaoOO1 aux = new ContextoExecucaoOO1(ambiente);

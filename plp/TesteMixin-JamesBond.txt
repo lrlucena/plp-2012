@@ -1,0 +1,82 @@
+{
+
+categoria FlyingAbility {
+	abstract a();
+	proc fly() {
+		this.getName();
+	  	write(" está voando!")
+	}
+},
+
+categoria DivingAbility {
+	abstract a();
+	
+	proc dive() {
+		this.getName();
+	  	write(" está mergulhando!")
+	}
+},
+
+classe Plane mixin FlyingAbility {
+
+	string name = null;
+
+	Plane(){
+	   this.name := "Concorde";
+	},
+
+	proc getName(){
+	  write(this.name)
+	},
+	
+	proc a(){
+	  write("AaA - plane")
+	}
+},
+
+classe Submarine mixin DivingAbility {
+
+	string name = null;
+
+	Submarine(){
+		this.name := "Yellow Submarine";
+	},
+	
+	proc getName(){
+	  write(this.name)
+	},
+	
+	proc a(){
+	  write("AaA - submarine")
+	}
+},
+
+classe JamesBondVihicle mixin FlyAbility, DivingAbility {
+
+	string name = null;
+
+	JamesBondVihicle(){
+		this.name := "James Bond's Vehicle";
+	},
+
+	proc getName(){
+	  write(this.name)
+	},
+	proc a(){
+	  write("AaA - james")
+	}
+};
+
+{
+	Plane concorde = new Plane();
+	Submarine yellow = new Submarine();
+	JamesBondVihicle bond = new JamesBondVihicle();
+	
+	concorde.fly();
+	yellow.dive();
+	
+	bond.fly();
+	bond.dive()
+}
+
+}
