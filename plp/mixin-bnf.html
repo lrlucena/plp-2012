@@ -1,0 +1,566 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0084)http://www.cin.ufpe.br/~in1007/linguagens/OrientadaObjetos2/orientadaObjetosBNF.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+
+
+
+
+  
+
+
+  <meta name="ProgId" content="Word.Document">
+
+
+    <meta name="Generator" content="Microsoft Word 11">
+
+
+      <meta name="Originator" content="Microsoft Word 11">
+
+
+        <link rel="File-List" href="http://www.cin.ufpe.br/~in1007/linguagens/OrientadaObjetos2/bnfFontesOrientadaObjetos1_arquivos/filelist.xml">
+
+
+          <link rel="Edit-Time-Data" href="http://www.cin.ufpe.br/~in1007/linguagens/OrientadaObjetos2/bnfFontesOrientadaObjetos1_arquivos/editdata.mso"><!--[if !mso]>
+
+<style>
+
+v\:* {behavior:url(#default#VML);}
+
+o\:* {behavior:url(#default#VML);}
+
+w\:* {behavior:url(#default#VML);}
+
+.shape {behavior:url(#default#VML);}
+
+</style>
+
+<![endif]--><title>Linguagem Orientada a Objetos 1 - BNF com Fontes</title><!--[if gte mso 9]><xml>
+
+<o:DocumentProperties>
+
+<o:Author>Elifrancis</o:Author>
+
+<o:Template>Normal</o:Template>
+
+<o:LastAuthor>Elifrancis</o:LastAuthor>
+
+<o:Revision>2</o:Revision>
+
+<o:TotalTime>3</o:TotalTime>
+
+<o:Created>2006-09-13T10:05:00Z</o:Created>
+
+<o:LastSaved>2006-09-13T10:08:00Z</o:LastSaved>
+
+<o:Pages>1</o:Pages>
+
+<o:Words>1967</o:Words>
+
+<o:Characters>10622</o:Characters>
+
+<o:Company>Home</o:Company>
+
+<o:Lines>88</o:Lines>
+
+<o:Paragraphs>25</o:Paragraphs>
+
+<o:CharactersWithSpaces>12564</o:CharactersWithSpaces>
+
+<o:Version>11.5606</o:Version>
+
+</o:DocumentProperties>
+
+</xml><![endif]--><!--[if gte mso 9]><xml>
+
+<w:WordDocument>
+
+<w:HyphenationZone>21</w:HyphenationZone>
+
+<w:ValidateAgainstSchemas/>
+
+<w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+
+<w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+
+<w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+
+<w:Compatibility>
+
+<w:UseFELayout/>
+
+</w:Compatibility>
+
+<w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+
+</w:WordDocument>
+
+</xml><![endif]--><!--[if gte mso 9]><xml>
+
+<w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+
+</w:LatentStyles>
+
+</xml><![endif]-->
+
+
+
+          
+
+
+
+
+
+
+          <style>
+
+            <!--
+
+A:hover {text-decoration:normal; background-color:#000000; }
+
+
+
+/* Font Definitions */
+
+@font-face
+
+{font-family:Batang;
+
+panose-1:2 3 6 0 0 1 1 1 1 1;
+
+mso-font-alt:"Arial Unicode MS";
+
+mso-font-charset:129;
+
+mso-generic-font-family:auto;
+
+mso-font-format:other;
+
+mso-font-pitch:fixed;
+
+mso-font-signature:1 151388160 16 0 524288 0;}
+
+@font-face
+
+{font-family:"\@Batang";
+
+panose-1:0 0 0 0 0 0 0 0 0 0;
+
+mso-font-charset:129;
+
+mso-generic-font-family:auto;
+
+mso-font-format:other;
+
+mso-font-pitch:fixed;
+
+mso-font-signature:1 151388160 16 0 524288 0;}
+
+/* Style Definitions */
+
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+
+{mso-style-parent:"";
+
+margin:0cm;
+
+margin-bottom:.0001pt;
+
+mso-pagination:widow-orphan;
+
+font-size:12.0pt;
+
+font-family:"Times New Roman";
+
+mso-fareast-font-family:Batang;
+
+color:black;}
+
+a:link, span.MsoHyperlink
+
+{color:#990100;
+
+mso-text-animation:none;
+
+text-decoration:none;
+
+text-underline:none;
+
+text-decoration:none;
+
+text-line-through:none;}
+
+a:visited, span.MsoHyperlinkFollowed
+
+{color:#990100;
+
+mso-text-animation:none;
+
+text-decoration:none;
+
+text-underline:none;
+
+text-decoration:none;
+
+text-line-through:none;}
+
+p
+
+{font-size:12.0pt;
+
+font-family:"Times New Roman";
+
+mso-fareast-font-family:Batang;
+
+color:black;}
+
+@page Section1
+
+{size:595.3pt 841.9pt;
+
+margin:70.85pt 3.0cm 70.85pt 3.0cm;
+
+mso-header-margin:35.4pt;
+
+mso-footer-margin:35.4pt;
+
+mso-paper-source:0;}
+
+div.Section1
+
+{page:Section1;}
+
+/* List Definitions */
+
+ol
+
+{margin-bottom:0cm;}
+
+ul
+
+{margin-bottom:0cm;}
+
+            -->
+
+          </style><!--[if gte mso 10]>
+
+<style>
+
+/* Style Definitions */
+
+table.MsoNormalTable
+
+{mso-style-name:"Tabela normal";
+
+mso-tstyle-rowband-size:0;
+
+mso-tstyle-colband-size:0;
+
+mso-style-noshow:yes;
+
+mso-style-parent:"";
+
+mso-padding-alt:0cm 5.4pt 0cm 5.4pt;
+
+mso-para-margin:0cm;
+
+mso-para-margin-bottom:.0001pt;
+
+mso-pagination:widow-orphan;
+
+font-size:10.0pt;
+
+font-family:"Times New Roman";
+
+mso-fareast-font-family:"Times New Roman";
+
+mso-ansi-language:#0400;
+
+mso-fareast-language:#0400;
+
+mso-bidi-language:#0400;}
+
+</style>
+
+<![endif]--><!--[if gte mso 9]><xml>
+
+<o:shapedefaults v:ext="edit" spidmax="2050"/>
+
+</xml><![endif]--><!--[if gte mso 9]><xml>
+
+<o:shapelayout v:ext="edit">
+
+<o:idmap v:ext="edit" data="1"/>
+
+</o:shapelayout></xml><![endif]--></head><body style="background-color: white;" alink="#a80026" lang="PT-BR" link="#990100" vlink="#990100" marginwidth="0">
+
+
+
+          <div class="Section1"><br>
+
+            <table class="MsoNormalTable" style="width: 588.75pt;" border="0" cellpadding="0" cellspacing="0" width="785">
+
+              <tbody><tr style="">
+
+                <td style="padding: 0cm; width: 588.75pt;" width="785">
+
+                  <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/Programa.java">&nbsp;Programa</a> ::= "{" <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos2/declaracao/ListaDeclaracaoOO.java">ListaDeclaracaoOO</a> ";" <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/Comando.java">Comando</a>
+
+                  "}"</span></p>
+
+                  <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;">&nbsp;Comando
+
+                  ::= <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos2/comando/AtribuicaoOO2.java">Atribuicao</a>
+
+                  </span></p>
+
+                  <p class="MsoNormal" style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">| <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/ComDeclaracao.java">ComDeclaracao</a>
+
+                  <o:p></o:p></span></p>
+
+                  <p style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">| <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/While.java">While</a> <o:p></o:p></span></p>
+
+                  <p style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">|<a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/IfThenElse.java">
+
+                  IfThenElse</a> <o:p></o:p></span></p>
+
+                  <p style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">|<a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/IO.java"> IO </a><o:p></o:p></span></p>
+
+                  <p style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">| <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/Sequencial.java">Comando
+
+                  ";" Comando</a> <o:p></o:p></span></p>
+
+                  <p style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">| <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/Skip.java">Skip </a><o:p></o:p></span></p>
+
+                  <p style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">| <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos2/comando/NewOO2.java">New</a> <o:p></o:p></span></p>
+
+                  <p style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">| <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos2/comando/ChamadaMetodoOO2.java">ChamadaMetodo</a><o:p></o:p></span></p>
+
+                  <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;">&nbsp;Skip
+
+                  ::=</span></p>
+
+                  <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;">&nbsp;ComDeclaracao
+
+                  :: = "{" <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/declaracao/variavel/DecVariavel.java">DecVariavel</a>
+
+                  ";" <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/Comando.java">Comando</a>"}"
+
+                  <o:p></o:p></span></p>
+
+                  <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">&nbsp;While ::= "while" </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/Expressao.java"><span style="" lang="EN-US">Expressao</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US"> do"
+
+                  "{" </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/Comando.java"><span style="" lang="EN-US">Comando</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">"}"
+
+                  <o:p></o:p></span></p>
+
+                  <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">&nbsp;IfThenElse ::= "if" </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/Expressao.java"><span style="" lang="EN-US">Expressao</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                  "then" "{" </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/Comando.java"><span style="" lang="EN-US">Comando</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">"}"
+
+                  <o:p></o:p></span></p>
+
+                  <p class="MsoNormal" style="margin-left: 144pt;"><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">|
+
+                  "if" </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/Expressao.java"><span style="" lang="EN-US">Expressao</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US"> "then"
+
+                  "{" </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/Comando.java"><span style="" lang="EN-US">Comando</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">"}"
+
+                  "else" "{" </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/Comando.java"><span style="" lang="EN-US">Comando</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">"}"</span><span style="" lang="EN-US"> <o:p></o:p></span></p>
+
+                  <blockquote style="margin-top: 5pt; margin-bottom: 5pt;">
+
+                    <p><span style="font-size: 10pt; font-family: Arial;"><br>&nbsp;
+
+                    ChamadaMetodo ::= <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/Expressao.java">Expressao</a>
+
+                    "." <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/leftExpression/Id.java">Id</a>
+
+                    "(" <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/ListaExpressao.java">ListaExpressao</a>
+
+                    ")" | <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/Expressao.java">Expressao</a>
+
+                    "." <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/leftExpression/Id.java"><span style="" lang="EN-US">Id</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                    "("")" <br>
+
+                    <br>&nbsp;
+
+                    ListaExpressao ::= </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/Expressao.java"><span style="" lang="EN-US">Expressao</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US"> | </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/Expressao.java"><span style="" lang="EN-US">Expressao</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                    "," </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/ListaExpressao.java"><span style="" lang="EN-US">ListaExpressao</span></a></span><span style="font-size: 10pt; font-family: Arial;"> </span><span style="" lang="EN-US"><o:p></o:p></span></p>
+
+                  </blockquote>
+
+                  
+                  <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">New ::= </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/leftExpression/LeftExpression.java"><span style="" lang="EN-US">LeftExpression</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                  ":=" "new" </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/leftExpression/Id.java"><span style="" lang="EN-US">Id&nbsp; "("&nbsp; [ListaExpressao] ")"</span></a></span><span style="" lang="EN-US"><o:p></o:p></span></p>
+
+
+                  <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">Atribuicao ::= </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/leftExpression/LeftExpression.java"><span style="" lang="EN-US">LeftExpression</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                  ":=" </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/Expressao.java"><span style="" lang="EN-US">Expressao</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US"><o:p></o:p></span></p>
+
+                  <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">IO ::= </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/Write.java"><span style="color: black;" lang="EN-US">"write"</span><span style="" lang="EN-US"> </span><span style="color: black;" lang="EN-US">"("</span><span style="" lang="EN-US"> Expressao </span><span style="color: black;" lang="EN-US">")"</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                  | </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/comando/Read.java"><span style="color: black;" lang="EN-US">"read" "("</span><span style="color: rgb(153, 0, 51);" lang="EN-US"> </span><span style="color: black;" lang="EN-US">Id</span><span style="color: rgb(153, 0, 51);" lang="EN-US"> </span><span style="color: black;" lang="EN-US">")"</span><span style="" lang="EN-US"> </span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US"><o:p></o:p></span></p>
+
+                  
+
+                  <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">Expressao ::= </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/valor/Valor.java"><span style="" lang="EN-US">Valor </span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">| </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/unaria/ExpUnaria.java"><span style="" lang="EN-US">ExpUnaria</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                  | </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/binaria/ExpBinaria.java"><span style="" lang="EN-US">ExpBinaria</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                  | </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/leftExpression/LeftExpression.java"><span style="" lang="EN-US">LeftExpression</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                  | </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/This.java"><span style="" lang="EN-US">this</span></a></span><span style="font-size: 10pt; font-family: Arial; font-weight: bold;"></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US"><br>
+                </span></p>
+                <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">Valor ::= </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/valor/ValorConcreto.java"><span style="" lang="EN-US">ValorConcreto</span></a></span><span style="" lang="EN-US"><o:p></o:p></span></p>
+
+
+                <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">ValorConcreto ::= </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/valor/ValorInteiro.java"><span style="" lang="EN-US">ValorInteiro</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                | </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/valor/ValorBooleano.java"><span style="" lang="EN-US">ValorBooleano</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                | </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/valor/ValorString.java"><span style="" lang="EN-US">ValorString</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                | </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/valor/ValorNull.java"><span style="" lang="EN-US">ValorNull</span></a></span><span style="" lang="EN-US"><o:p></o:p></span></p>
+
+                <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">ExpUnaria ::= </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/unaria/ExpMenos.java"><span style="" lang="EN-US">"-" Expressao</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                | </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/unaria/ExpNot.java"><span style="" lang="EN-US">"not" Expressao</span></a></span><span style="font-size: 10pt; font-family: Arial;" lang="EN-US">
+
+                | </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/unaria/ExpLength.java"><span style="" lang="EN-US">"length" Expressao</span></a></span><span style="font-size: 10pt; font-family: Arial;"> <span lang="EN-US"><o:p></o:p></span></span></p>
+
+                <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;">ExpBinaria
+
+                ::= <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/binaria/ExpSoma.java">Expressao
+
+                "+" Expressao</a> <o:p></o:p></span></p>
+
+                <p class="MsoNormal" style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">| <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/binaria/ExpSub.java">Expressao
+
+                "-" Expressao</a> <o:p></o:p></span></p>
+
+                <p style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">| <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/binaria/ExpAnd.java">Expressao
+
+                "and" Expressao</a> <o:p></o:p></span></p>
+
+                <p style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">| <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/binaria/ExpOr.java">Expressao
+
+                "or" Expressao</a> <o:p></o:p></span></p>
+
+                <p style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">| <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/binaria/ExpEquals.java">Expressao
+
+                "==" Expressao</a> <o:p></o:p></span></p>
+
+                <p style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">| <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/binaria/ExpConcat.java">Expressao
+
+                "++" Expressao</a> <o:p></o:p></span></p>
+                
+                <blockquote style="margin-top: 5pt; margin-bottom: 5pt;">
+                  
+                  <p><span style="font-size: 10pt; font-family: Arial;">LeftExpression ::= <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/leftExpression/Id.java">Id</a> | <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/leftExpression/AcessoAtributo.java">AcessoAtributo</a>
+                  
+                  </span></p>
+                  
+                  <p><span style="font-size: 10pt; font-family: Arial;">AcessoAtributo ::= <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos2/expressao/leftExpression/AcessoAtributoIdOO2.java">LeftExpression.Id</a>
+                  
+                  | <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos2/expressao/leftExpression/AcessoAtributoThisOO2.java">this.Id</a>
+
+                  </span></p>
+                  
+
+                  <p><span style="font-size: 10pt; font-family: Arial;">ListaDeclaracaoOO := <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos2/declaracao/classe/DecClasseSimplesOO2.java"><strong>DecClassOrCategory | DecClassOrCategory "," ListaDeclaracaoOO</strong></a></span><br>
+                </span></p>
+
+                  <p><span style="font-size: 10pt; font-family: Arial;"><strong>DecClassOrCategory</strong> := <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos2/declaracao/classe/DecClasseSimplesOO2.java"><strong>DecClasse | DecClassOrCategory</strong></a></span><br>
+                </span></p>
+
+
+                <p style="width: 792px;"><span style="font-size: 10pt; font-family: Arial;">
+                  <strong>DecCategoria </strong> ::=</span>
+                  <span style="font-size: 10pt; font-family: Arial;"><strong>
+                    <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos2/declaracao/classe/DecClasseSimplesOO2.java">"categoria" Id "{" [DecAssinatura ";"] DecProcedimento "}"</a></strong></span>
+                </p>
+
+
+
+                <p style="width: 792px;" class="MsoNormal"><span style="font-size: 10pt; font-family: Arial;"><span>DecClasse
+
+                ::= </span><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos2/declaracao/classe/DecClasseSimplesOO2.java"><span>"classe"
+
+                Id ["extends"&nbsp; Id] <strong>["mixin" ListaId] </strong> {" DecVariavel ";" DecConstrutor "," DecProcedimento "}"</span> </a></span></p>
+
+
+
+                <p><span style="font-size: 10pt; font-family: Arial;">DecConstrutor := <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos2/declaracao/DecConstrutor.java">Id "(" ListaDeclaracaoParametro ")" "{" Comando "}"</a><br>
+              </span></p>
+              
+              <p><span style="font-size: 10pt; font-family: Arial;">DecVariavel ::= <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/declaracao/variavel/SimplesDecVariavel.java">Tipo
+
+              Id "=" Expressao</a> </span></p>
+
+
+              <p class="MsoNormal" style="margin-left: 72pt;"><span style="font-size: 10pt; font-family: Arial;">| <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/declaracao/variavel/CompostaDecVariavel.java">DecVariavel
+
+              "," DecVariavel</a></span> </p>
+
+              <p style="margin-left: 72pt;"><span style="font-size: 10pt; font-family: Arial;">|
+
+              <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos2/declaracao/variavel/DecVariavelObjetoOO2.java">Tipo
+
+              Id ":=" "new" Id</a></span></p>
+
+              <p><span style="font-size: 10pt; font-family: Arial;"><strong>DecAssinatura </strong> ::=</span>
+              <span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/util/TipoPrimitivo.java"><span style="" lang="IT"><strong>"abstract" Id "(" ListaDeclaracaoParametro ")" | DecAssinatura "," DecAssinatura </strong></a>  </span>
+              </p>
+
+              
+              <p><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/DecProcedimento.java"><span style="color: black;">DecProcedimento</span></a>
+
+              ::=<a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/declaracao/procedimento/DecProcedimento.java">
+
+              "proc" Id "(" ListaDeclaracaoParametro ")"
+
+              "{" Comando "}" </a></span></p>
+
+              <p style="margin-left: 108pt;"><span style="font-size: 10pt; font-family: Arial;">| <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/declaracao/procedimento/DecProcedimentoComposta.java">DecProcedimento
+
+              "," DecProcedimento</a> </span></p>
+
+            </blockquote>
+
+            <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;">ListaDeclaracaoParametro
+
+            ::= <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/declaracao/procedimento/DecParametro.java">Tipo
+
+            Id</a> | <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/declaracao/procedimento/ListaDeclaracaoParametro.java">Tipo
+
+            Id "," ListaDeclaracaoParametro</a> </span></p>
+
+            <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;">Tipo
+
+            ::= <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/util/TipoClasse.java">TipoClasse</a> |
+
+            <a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/util/TipoPrimitivo.java">TipoPrimitivo </a><o:p></o:p></span></p>
+
+            <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;" lang="IT">TipoClasse ::= </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/expressao/leftExpression/Id.java"><span style="" lang="IT">Id</span></a></span><span style="font-size: 10pt; font-family: Arial;"> <span lang="IT"><o:p></o:p></span></span></p>
+
+            <p style="margin-left: 36pt;"><span style="font-size: 10pt; font-family: Arial;" lang="IT">TipoPrimitivo ::= </span><span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/util/TipoPrimitivo.java"><span style="" lang="IT">"string" | "int" |
+
+            "boolean"</span></a></span><span style="font-size: 10pt; font-family: Arial;"> </span><span style="" lang="IT"><o:p></o:p></span></p>
+
+
+            <p style="margin-left: 36pt;">
+              <span style="font-size: 10pt; font-family: Arial;" lang="IT"><strong> ListaID </strong> ::= </span>
+              <span style="font-size: 10pt; font-family: Arial;"><a href="http://www.cin.ufpe.br/~in1007/linguagens/plp/orientadaObjetos1/util/TipoPrimitivo.java"><span style="" lang="IT"> Id | Id "," ListaId </a> </span>
+            </p>
+          </td>
+
+        </tr>
+
+      </tbody></table>
+
+
+          </body></html>
