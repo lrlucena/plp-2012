@@ -53,7 +53,11 @@ public class DecCategoriaSimples implements  Declaracao {
         ambiente.mapDefCategoria(nome, new DefCategoria(nome, assinaturas, metodos));
         ambiente.incrementa();
         ambiente.map(new Id("this"), new TipoClasse(nome));
-        resposta =  metodos.checaTipo(ambiente) && assinaturas.checaTipo(ambiente);
+        resposta =  metodos.checaTipo(ambiente);
+
+        if (assinaturas != null)
+            resposta = resposta && assinaturas.checaTipo(ambiente);
+
         ambiente.restaura();
         return resposta;
     }

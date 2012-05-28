@@ -1150,7 +1150,8 @@ DecProcedimento PListaAssinaturas():
 }
 {
   (
-    assinaturas = PDecAssinatura()  < SEMICOLON >
+   assinaturas = PDecAssinatura()  < SEMICOLON >
+   | {}
   )
   {    return assinaturas;
   }
@@ -1409,9 +1410,19 @@ DecProcedimento PDecProcedimento() :
 
 DecProcedimento PDecAssinatura():
 {
-  DecProcedimento retorno;}
+  DecProcedimento retorno;
+}
 {
-  (    LOOKAHEAD(PDecAssinaturaSimples() < COMMA >)    {      return PDecAssinaturaComposta();    }  |    {      return PDecAssinaturaSimples();    }  )}
+    (
+     LOOKAHEAD(PDecAssinaturaSimples() < COMMA >)
+     retorno = PDecAssinaturaComposta()
+     |
+     retorno = PDecAssinaturaSimples()
+     )
+     {
+      return retorno;
+     }
+}
 
 DecProcedimento PDecAssinaturaSimples():
 {  Id nome;

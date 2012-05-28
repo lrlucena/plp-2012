@@ -47,8 +47,12 @@ public class DefCategoria {
 		
 		try {
 			return decProcedimento.getProcedimento(idMetodo);
-		} catch (Exception e) {
+		} catch (ProcedimentoNaoDeclaradoException e) {
+                    if (assinaturas != null) {
 			return assinaturas.getProcedimento(idMetodo);
+                    } else {
+                        throw new ProcedimentoNaoDeclaradoException(idMetodo);
+                    }
 		}
 	}
 
@@ -60,8 +64,12 @@ public class DefCategoria {
 		return decProcedimento.getListProcedimentoNomes();
 	}
 	
-	public List<String> getListAssinaturaNomes() {		
+	public List<String> getListAssinaturaNomes() {
+            if (assinaturas != null) {
 		return assinaturas.getListAssinaturaNomes();
+            } else {
+                return new ArrayList<String>();
+            }
 	}
 
 }
