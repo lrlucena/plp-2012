@@ -1,0 +1,50 @@
+{
+	categoria Mix1  {
+          abstract needed(),
+          abstract fromothermix();
+          proc catmethod() {
+              write("Mixin::catmethod");
+              this.needed();
+              this.fromothermix()
+          }
+	},
+
+	categoria Mix2  {
+          abstract needed2();
+          proc catmethod2() {
+              write("Mixin::catmethod2");
+              this.needed2();
+              this.fromothermix()
+         },
+         proc fromothermix() {
+             write("Mixin::fromothermix")
+         }
+	},
+
+        classe Class mixin Mix1, Mix2  {
+		int valor = 0;
+
+		Class(int i) {
+                    this.valor := i
+		},
+
+		proc print() {
+                    write("Classe::print " ++ this.valor);
+                    this.catmethod()
+                },
+
+                proc needed() {
+                    write("Class::needed impl")
+                },
+
+                proc needed2() {
+                    write("Class::needed2 impl")
+                }
+	};
+	{
+                Class c := new Class(9);
+                c.print();
+                c.catmethod2()
+	}
+
+}
