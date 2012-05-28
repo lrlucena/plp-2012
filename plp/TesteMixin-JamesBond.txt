@@ -1,7 +1,7 @@
 {
 
 categoria FlyingAbility {
-	abstract a();
+	abstract getName();
 	proc fly() {
 		this.getName();
 	  	write(" está voando!")
@@ -9,8 +9,7 @@ categoria FlyingAbility {
 },
 
 categoria DivingAbility {
-	abstract a();
-	
+	abstract getName();
 	proc dive() {
 		this.getName();
 	  	write(" está mergulhando!")
@@ -19,10 +18,10 @@ categoria DivingAbility {
 
 classe Plane mixin FlyingAbility {
 
-	string name = null;
+	string name = "";
 
 	Plane(){
-	   this.name := "Concorde";
+	   this.name := "Concorde"
 	},
 
 	proc getName(){
@@ -36,10 +35,10 @@ classe Plane mixin FlyingAbility {
 
 classe Submarine mixin DivingAbility {
 
-	string name = null;
+	string name = "";
 
 	Submarine(){
-		this.name := "Yellow Submarine";
+		this.name := "Yellow Submarine"
 	},
 	
 	proc getName(){
@@ -51,28 +50,30 @@ classe Submarine mixin DivingAbility {
 	}
 },
 
-classe JamesBondVihicle mixin FlyAbility, DivingAbility {
+classe JamesBondVihicle mixin FlyingAbility, DivingAbility {
 
-	string name = null;
+	string name = "";
 
 	JamesBondVihicle(){
-		this.name := "James Bond's Vehicle";
+		this.name := "James Bond's Vehicle"
 	},
 
 	proc getName(){
 	  write(this.name)
 	},
+	
 	proc a(){
 	  write("AaA - james")
 	}
 };
 
 {
-	Plane concorde = new Plane();
-	Submarine yellow = new Submarine();
-	JamesBondVihicle bond = new JamesBondVihicle();
+	Plane concorde := new Plane(),
+	Submarine yellow := new Submarine(),
+	JamesBondVihicle bond := new JamesBondVihicle();
 	
 	concorde.fly();
+	
 	yellow.dive();
 	
 	bond.fly();
