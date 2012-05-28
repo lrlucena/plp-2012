@@ -1,0 +1,35 @@
+{
+    categoria Persistence  {
+        abstract typename(),
+        abstract mapping();
+        proc save() {
+            write("---begin save---");
+            this.typename();
+            this.mapping();
+            write("===end save===")
+            }
+        },
+
+    classe Pessoa mixin Persistence {
+        string nome = "",
+        int idade = 0;
+
+        Pessoa(string nome, int idade) {
+            this.nome := nome;
+            this.idade := idade
+            },
+
+        proc typename() {
+            write("Tipo: pessoa")
+            },
+        proc mapping() {
+            write("[nome: " ++ this.nome ++ ", idade:" ++ this.idade++"]")
+            }
+        };
+
+    {
+        Pessoa p := new Pessoa("foo", 50);
+        p.save()
+
+        }
+    }

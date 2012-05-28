@@ -1,0 +1,50 @@
+{
+    categoria Persistence  {
+        abstract typename(),
+        abstract mapping();
+        proc save() {
+            write("---begin save---");
+            this.typename();
+            this.mapping();
+            write("===end save===")
+            }
+        },
+
+    classe Pessoa {
+        string nome = "",
+        int idade = 0;
+
+        Pessoa(string nome, int idade) {
+            this.nome := nome;
+            this.idade := idade
+            },
+        proc typename() {
+            write("Tipo: pessoa")
+            },
+        proc mapping() {
+            write("[nome: " ++ this.nome ++ ", idade:" ++ this.idade++"]")
+            }
+
+        },
+
+    classe Cliente extends Pessoa mixin Persistence {
+        string matricula = "";
+
+        Cliente(string nome, int idade, string matricula) {
+            this.nome := nome;
+            this.idade := idade;
+            this.matricula := matricula          
+            },
+        proc typename() {
+            write("Tipo: cliente")
+            },
+        proc mapping() {
+            write("[nome: " ++ this.nome ++ ", idade:" ++ this.idade++", matricula: " ++ this.matricula ++"]")
+            }
+        } ;
+
+    {
+        Cliente p := new Cliente("foo", 50, "abc123");
+        p.save()        
+        }
+    }
