@@ -1,0 +1,39 @@
+{
+	categoria CalculaAceleracao  {
+          proc a(int v, int s) {
+           	write(" supondo que o corpo saiu do repouso e a linguagem oferece divisao ->  aceleracao =  v/s")
+          },
+          proc b(){
+          	write("bb")
+          }
+	},
+	
+	classe Vehicle mixin CalculaAceleracao {
+		
+		int velocidade = 0,
+		int segundos = 0;
+
+		Vehicle(int v, int s){
+			this.velocidade := v;
+			this.segundos := s
+		},
+
+		proc toString() {
+			write("[Velocidade: " ++ this.velocidade ++ " km/h Segundos: " ++ this.segundos ++ "]")
+		},
+		
+		proc calc(){
+			this.a(this.velocidade, this.segundos)
+		}	
+		
+			
+	};
+
+	{
+		Vehicle v := new Vehicle(200,10);
+		v.toString();
+		v.calc()
+
+	}
+
+}

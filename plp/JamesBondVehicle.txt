@@ -1,0 +1,54 @@
+{
+	categoria FlyingAbility  {
+        abstract flyWithWings(),
+        abstract turbine();
+		proc fly() { 
+			write("-> I´m Flying!");
+			this.flyWithWings();
+			this.turbine()
+		}
+
+	},
+	
+	classe Vehicle{
+		
+		int qtRodas = 0;
+
+		Vehicle(int qtdRodas){
+			this.qtRodas := qtdRodas
+		},
+
+		proc printQtRodas() {
+			write(" -> quantidade de Rodas:: " ++ this.qtRodas)
+		}		
+	},
+	
+	categoria DivingAbility  {
+		proc dive() { 
+			write("-> I´m diving!")
+		},
+	    proc turbine(){ write("Diving with Turbine")}
+	},
+	
+	classe JamesBondVehicle extends Vehicle mixin FlyingAbility, DivingAbility {
+		
+		int velocity = 100;
+
+		JamesBondVehicle(int v){
+			this.velocity := v
+		},
+		
+		proc name(){ write("My name is James Bond Vehicle")},
+		proc flyWithWings(){write("-> Now I´m flying with wings. velocity = " ++ this.velocity ++ " km/h")},
+		proc turbine(){ write("Vehicle with Turbine")}
+	};
+
+	{
+		JamesBondVehicle jb := new JamesBondVehicle(200);
+		jb.name();
+		jb.fly();
+		jb.dive();
+		jb.printQtRodas()
+	}
+
+}
