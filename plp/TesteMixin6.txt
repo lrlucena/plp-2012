@@ -1,0 +1,62 @@
+{
+    categoria Mix1  {
+        abstract needed(),
+        abstract fromothermix();
+        proc catmethod() {
+            write("Mixin::catmethod");
+            this.needed();
+            this.fromothermix()
+            }
+        },
+
+    categoria Mix2  {
+        abstract needed2();
+        proc catmethod2() {
+            write("Mixin::catmethod2");
+            this.needed2();
+            this.fromothermix()
+            },
+        proc fromothermix() {
+            write("Mixin::fromothermix")
+            }
+        },
+
+    classe Super mixin Mix2{
+        int v = 1;
+        Super() {
+            v := 1
+            },
+
+        proc sup() {
+            write("Supper::sup")
+            },
+        proc needed2() {
+            write("Class::needed2 impl")
+            }
+
+        },
+
+    classe Class extends Super mixin Mix1  {
+        int valor = 0;
+
+        Class(int i) {
+            this.valor := i
+            },
+
+        proc print() {
+            write("Classe::print " ++ this.valor);
+            this.catmethod()
+            },
+
+        proc needed() {
+            write("Class::needed impl")
+            }
+	};
+    {
+        Class c := new Class(9);
+        c.print();
+        c.catmethod2();
+        c.sup()
+        }
+
+    }
